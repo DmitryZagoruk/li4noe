@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дмитрий Загорук — копирайтер</title>
+<style>
+  :root {
+    --blue: #1B4F8A;
+    --dark: #1A1A1A;
+    --gray: #666666;
+    --light: #F4F6FA;
+    --border: #E2E6EE;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--white); color: var(--dark);
+    font-size: 16px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  nav {
+    position: sticky; top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100; padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 760px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-name { font-size: 14px; font-weight: 600; color: var(--dark); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--blue); }
+
+  .page { max-width: 760px; margin: 0 auto; padding: 0 2rem 5rem; }
+
+  /* HERO */
+  .hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); }
+  .hero-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.75rem; }
+  .hero-name { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--dark); margin-bottom: 0.6rem; }
+  .hero-contacts { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+  .contact-link { font-size: 14px; color: var(--blue); text-decoration: none; transition: opacity 0.15s; }
+  .contact-link:hover { opacity: 0.7; }
+  .contact-sep { color: var(--border); }
+
+  /* SECTIONS */
+  section { padding: 3rem 0 0; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.5rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .skill-card { background: var(--light); border-radius: 10px; padding: 1rem 1.1rem; }
+  .skill-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .skill-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+  /* JOBS */
+  .jobs { display: flex; flex-direction: column; }
+  .job { padding: 1.5rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 145px 1fr; gap: 0 1.5rem; }
+  .job:last-child { border-bottom: none; }
+  .job-period { font-size: 12px; color: var(--gray); line-height: 1.5; }
+  .job-company { font-size: 13px; font-weight: 600; color: var(--dark); margin-top: 3px; }
+  .job-duration { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .job-tag { display: inline-block; font-size: 11px; color: var(--blue); background: #EAF0F9; border-radius: 4px; padding: 2px 6px; margin-top: 6px; }
+  .job-role { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+  .job-bullets { list-style: none; margin: 0; padding: 0; }
+  .job-bullets li { font-size: 14px; color: #444; line-height: 1.6; padding: 2px 0 2px 14px; position: relative; }
+  .job-bullets li::before { content: "–"; position: absolute; left: 0; color: var(--gray); }
+  .job-metrics { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 0.65rem; }
+  .metric { font-size: 12px; font-weight: 600; color: var(--blue); background: #EAF0F9; border-radius: 5px; padding: 3px 8px; }
+
+  /* PORTFOLIO */
+  .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .pcard {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.1rem 1.15rem;
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    min-height: 150px;
+  }
+  .pcard:hover { border-color: var(--blue); box-shadow: 0 2px 12px rgba(27,79,138,0.08); }
+  .pcard-type { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.45rem; }
+  .pcard-title { font-size: 14px; font-weight: 600; color: var(--dark); line-height: 1.4; margin-bottom: 0.4rem; }
+  .pcard-desc { font-size: 13px; color: var(--gray); line-height: 1.5; flex: 1; }
+  .pcard-footer { margin-top: 0.85rem; padding-top: 0.7rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .pcard-link { font-size: 12px; font-weight: 600; color: var(--blue); }
+  .pcard-note { font-size: 11px; color: #aaa; }
+  .pcard-warn { font-size: 11px; color: #c0392b; margin-top: 5px; }
+
+  /* FOOTER */
+  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-name { font-size: 14px; font-weight: 600; color: var(--dark); }
+  .footer-note { font-size: 13px; color: var(--gray); margin-top: 2px; }
+
+  @media (max-width: 580px) {
+    .job { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .page { padding: 0 1rem 4rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-name">Дмитрий Загорук</span>
+    <ul class="nav-links">
+      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#experience">Опыт</a></li>
+      <li><a href="#portfolio">Работы</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-label">Копирайтер · Редактор · Контент-маркетолог · CRM</div>
+    <h1 class="hero-name">Дмитрий Загорук</h1>
+    <div class="hero-contacts" id="contact">
+      <a class="contact-link" href="tel:+79699728310">+7 (969) 972-83-10</a>
+      <span class="contact-sep">·</span>
+      <a class="contact-link" href="mailto:zagorukdmitry@yandex.ru">zagorukdmitry@yandex.ru</a>
+      <span class="contact-sep">·</span>
+      <a class="contact-link" href="https://t.me/dmitry_zagoruk" target="_blank">@dmitry_zagoruk</a>
+      <span class="contact-sep">·</span>
+      <span style="font-size:14px;color:var(--gray);">Удалённо · Частичная занятость</span>
+    </div>
+  </header>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Что умею</div>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-title">Email-копирайтинг</div><div class="skill-desc">B2B и B2C рассылки, темы писем, A/B-тесты, структура по сегментам. Mindbox, Unisender, Mailchimp, Senler.</div></div>
+      <div class="skill-card"><div class="skill-title">Редактура и редполитика</div><div class="skill-desc">Правка по Главреду, tone of voice, стоп-слова, единый стиль коммуникации с нуля.</div></div>
+      <div class="skill-card"><div class="skill-title">Контент для соцсетей</div><div class="skill-desc">Посты, карточки, сторис, адаптация под форматы и аудитории. ВКонтакте, Telegram.</div></div>
+      <div class="skill-card"><div class="skill-title">Лендинги и статьи</div><div class="skill-desc">Продающие и информационные тексты, SEO-оптимизация. Tilda, WordPress.</div></div>
+      <div class="skill-card"><div class="skill-title">Контент-стратегия</div><div class="skill-desc">Контент-план, воронки, медиаплан, ToV и брендбук.</div></div>
+      <div class="skill-card"><div class="skill-title">Аналитика</div><div class="skill-desc">GA4, Яндекс.Метрика, TGStat. Разбор метрик и формулировка гипотез.</div></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Опыт работы</div>
+    <div class="jobs">
+
+      <div class="job">
+        <div>
+          <div class="job-period">Сент. 2025 — сейчас</div>
+          <div class="job-duration">10 месяцев</div>
+          <div class="job-company">НТК Интурист</div>
+          <div class="job-tag">B2B</div>
+        </div>
+        <div>
+          <div class="job-role">Email-копирайтер</div>
+          <ul class="job-bullets">
+            <li>Пишу и редактирую B2B email-рассылки для разных сегментов турагентов</li>
+            <li>Разрабатываю структуру писем и адаптирую контент под целевую аудиторию</li>
+            <li>Работаю с сегментацией и персонализацией коммуникаций в Mindbox</li>
+            <li>Веду редактуру по корпоративной редполитике: структура, tone of voice, единый стиль</li>
+            <li>Разрабатываю гипотезы для A/B-тестов тем писем и анализирую результаты</li>
+          </ul>
+          <div class="job-metrics">
+            <span class="metric">~40 писем в месяц</span>
+            <span class="metric">CTR выше рынка в 4×</span>
+            <span class="metric">Mindbox · A/B-тесты</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job">
+        <div>
+          <div class="job-period">Янв. 2023 — Авг. 2025</div>
+          <div class="job-duration">2 года 8 месяцев</div>
+          <div class="job-company">Русский стиль</div>
+          <div class="job-tag">B2C · B2B2C</div>
+        </div>
+        <div>
+          <div class="job-role">Интернет-маркетолог / копирайтер</div>
+          <ul class="job-bullets">
+            <li>Писал 12–16 email-рассылок в месяц: open rate 17%, CTR 2,5% — выше среднего по e-commerce</li>
+            <li>Разработал ToV и брендбук, внедрил единый стиль коммуникации</li>
+            <li>Вёл контент для соцсетей, блога и вебинаров — увеличил охваты на 30–40%</li>
+            <li>Привлёк 150–220 лидов с онлайн-ивентов и челленджей при конверсии в заявку 5–7%</li>
+            <li>Участвовал в планировании контента и маркетинговых кампаний</li>
+          </ul>
+          <div class="job-metrics">
+            <span class="metric">Open rate 17%</span>
+            <span class="metric">CTR 2,5%</span>
+            <span class="metric">Охваты +30–40%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job">
+        <div>
+          <div class="job-period">Март 2023 — Июнь 2025</div>
+          <div class="job-duration">2 года 4 месяца</div>
+          <div class="job-company">Рисуем вместе</div>
+          <div class="job-tag">EdTech</div>
+        </div>
+        <div>
+          <div class="job-role">Основатель / редактор</div>
+          <ul class="job-bullets">
+            <li>Выстроил редполитику, контент-стратегию и tone of voice проекта с нуля</li>
+            <li>Привлёк 730 учеников через SEO, контент-маркетинг и социальные сети</li>
+            <li>Самостоятельно создавал весь маркетинговый контент: лендинги, email, статьи, соцсети</li>
+            <li>Обеспечил удержание 50% учеников до конца курса</li>
+          </ul>
+          <div class="job-metrics">
+            <span class="metric">730 учеников</span>
+            <span class="metric">Удержание 50%</span>
+            <span class="metric">SEO · email · соцсети</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job">
+        <div>
+          <div class="job-period">Июнь — Дек. 2024</div>
+          <div class="job-duration">7 месяцев</div>
+          <div class="job-company">Комплето</div>
+          <div class="job-tag">B2B · агентство</div>
+        </div>
+        <div>
+          <div class="job-role">Контент-маркетолог</div>
+          <ul class="job-bullets">
+            <li>Разрабатывал контент-стратегию для корпоративных клиентов</li>
+            <li>Прописывал ToV и единые стандарты коммуникации</li>
+            <li>Писал тексты для соцсетей и email, строил контент-планы</li>
+            <li>Составлял маркетинговые воронки и точки касания</li>
+          </ul>
+          <div class="job-metrics">
+            <span class="metric">B2B IT-контент</span>
+            <span class="metric">jet.su</span>
+            <span class="metric">ToV и стандарты</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job">
+        <div>
+          <div class="job-period">Февр. — Июль 2023</div>
+          <div class="job-duration">6 месяцев</div>
+          <div class="job-company">Сан-Суши</div>
+          <div class="job-tag">B2C · франшиза</div>
+        </div>
+        <div>
+          <div class="job-role">SMM-менеджер / копирайтер</div>
+          <ul class="job-bullets">
+            <li>Создавал и адаптировал контент под 20 регионов: 15+ единиц контента в день</li>
+            <li>Обеспечивал единый ToV и брендбук во всех каналах</li>
+            <li>Выстроил воронку за 2 месяца: ER 2–4%, 45–60 лидов в месяц</li>
+            <li>Обучал франчайзи работе с контентом, контролировал соответствие стандартам</li>
+          </ul>
+          <div class="job-metrics">
+            <span class="metric">15+ единиц/день</span>
+            <span class="metric">ER 2–4%</span>
+            <span class="metric">20 регионов</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-label">Примеры работ</div>
+    <div class="portfolio-grid">
+
+      <a class="pcard" href="https://vk.com/wall-197105797_252577" target="_blank">
+        <div class="pcard-type">SMM · ВКонтакте</div>
+        <div class="pcard-title">Пост для франшизы Сан-Суши</div>
+        <div class="pcard-desc">Контент для федеральной сети с адаптацией под региональную аудиторию. Единый ToV на 20 регионов.</div>
+        <div class="pcard-footer">
+          <span class="pcard-link">Открыть →</span>
+          <span class="pcard-note">vk.com</span>
+        </div>
+      </a>
+
+      <a class="pcard" href="https://jet.su/services/" target="_blank">
+        <div class="pcard-type">B2B · IT · Веб</div>
+        <div class="pcard-title">Тексты для сайта Инфосистемы Джет</div>
+        <div class="pcard-desc">Пересборка текстовой части страницы услуг крупного IT-интегратора. Сложная B2B-тематика, структура под корпоративного клиента.</div>
+        <div class="pcard-footer">
+          <span class="pcard-link">Открыть →</span>
+          <span class="pcard-note">jet.su</span>
+        </div>
+      </a>
+
+      <a class="pcard" href="https://t.me/gallerybuksir/2209" target="_blank">
+        <div class="pcard-type">Telegram · Продажи</div>
+        <div class="pcard-title">Продающее приглашение для онлайн-школы</div>
+        <div class="pcard-desc">Текст для привлечения учеников в онлайн-школу рисования. Конверсионная механика без давления.</div>
+        <div class="pcard-footer">
+          <span class="pcard-link">Открыть →</span>
+          <span class="pcard-note">t.me</span>
+        </div>
+      </a>
+
+      <a class="pcard" href="https://www.instagram.com/p/C0zWCfQNm3v/" target="_blank">
+        <div class="pcard-type">Сценарий · Reels</div>
+        <div class="pcard-title">Сценарий Reels — 2 200 лайков</div>
+        <div class="pcard-desc">Спроектировал структуру, крючок, подачу и финал. Результат — 2 200 лайков на органике.</div>
+        <div class="pcard-footer">
+          <span class="pcard-link">Открыть →</span>
+          <span class="pcard-note">instagram.com</span>
+        </div>
+        <div class="pcard-warn">* Instagram запрещён в РФ</div>
+      </a>
+
+      <a class="pcard" href="https://pikabu.ru/story/rasskazyivayu_i_pokazyivayu_chto_takoe_komplementarnyie_tsveta_a_tsvetovoy_krug_ittena_11667000" target="_blank">
+        <div class="pcard-type">Статья · Пикабу · Органика</div>
+        <div class="pcard-title">Мануал о цветовом круге Иттена — 25 000 просмотров</div>
+        <div class="pcard-desc">Информационная статья о комплементарных цветах и цветовом круге. 25 000 просмотров на органическом трафике.</div>
+        <div class="pcard-footer">
+          <span class="pcard-link">Открыть →</span>
+          <span class="pcard-note">pikabu.ru</span>
+        </div>
+      </a>
+
+      <a class="pcard" href="https://docs.google.com/document/d/1Mr99C--eZFZbM5hPk-CRtlGKMZQAGat-uz3FVEeosFU/edit?usp=sharing" target="_blank">
+        <div class="pcard-type">Редполитика · ToV</div>
+        <div class="pcard-title">Разработка редполитики и tone of voice</div>
+        <div class="pcard-desc">Документ с правилами голоса бренда, стоп-словами, примерами формулировок и стилистическими принципами.</div>
+        <div class="pcard-footer">
+          <span class="pcard-link">Открыть →</span>
+          <span class="pcard-note">Google Docs</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-name">Дмитрий Загорук</div>
+      <div class="footer-note">Копирайтер · Удалённо · Частичная занятость</div>
+    </div>
+    <div style="text-align:right;">
+      <a class="contact-link" href="tel:+79699728310" style="font-size:13px;display:block;">+7 (969) 972-83-10</a>
+      <a class="contact-link" href="mailto:zagorukdmitry@yandex.ru" style="font-size:13px;display:block;margin-top:3px;">zagorukdmitry@yandex.ru</a>
+      <a class="contact-link" href="https://t.me/dmitry_zagoruk" target="_blank" style="font-size:13px;display:block;margin-top:3px;">@dmitry_zagoruk</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
