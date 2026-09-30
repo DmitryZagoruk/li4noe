@@ -1,361 +1,1074 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Дмитрий Загорук — копирайтер</title>
-<style>
-  :root {
-    --blue: #1B4F8A;
-    --dark: #1A1A1A;
-    --gray: #666666;
-    --light: #F4F6FA;
-    --border: #E2E6EE;
-    --white: #ffffff;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    background: var(--white); color: var(--dark);
-    font-size: 16px; line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  nav {
-    position: sticky; top: 0;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100; padding: 0 2rem;
-  }
-  .nav-inner {
-    max-width: 760px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 52px;
-  }
-  .nav-name { font-size: 14px; font-weight: 600; color: var(--dark); }
-  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-  .nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.15s; }
-  .nav-links a:hover { color: var(--blue); }
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMM-тетрадь ИЮР</title>
+<style>:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2430;--mut:#5b6675;--line:#e2e6ec;--acc:#1f5eff;--acc2:#e8efff;--ok:#12805c;--okbg:#e4f5ee;--warn:#9a5b00;--warnbg:#fff3dc;--bad:#b3261e;--badbg:#fde8e6;--code:#eef1f6;--sh:0 1px 2px rgba(20,30,50,.06),0 4px 16px rgba(20,30,50,.05)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#171e28;--ink:#e6ebf2;--mut:#98a3b3;--line:#263041;--acc:#6b96ff;--acc2:#1b2a4d;--ok:#4cc79a;--okbg:#12302a;--warn:#f0b357;--warnbg:#3a2c12;--bad:#ff8a80;--badbg:#3b1917;--code:#1f2836;--sh:none}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--acc)}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--acc);width:0;z-index:50}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh}
+aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--card);border-right:1px solid var(--line);padding:18px 14px 30px}
+aside .logo{font-weight:700;font-size:18px;margin:0 6px 2px}
+aside .sub{color:var(--mut);font-size:13px;margin:0 6px 12px}
+#q{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
+#qinfo{font-size:12px;color:var(--mut);margin:6px 6px 0;min-height:16px}
+.navpart{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:16px 8px 4px}
+aside nav a{display:block;padding:6px 10px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.35}
+aside nav a:hover{background:var(--acc2)}
+aside nav a.on{background:var(--acc2);color:var(--acc);font-weight:600}
+aside nav a.off{display:none}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin:10px 4px 0}
+main{padding:28px 34px 80px;max-width:980px;width:100%}
+.hero{background:linear-gradient(135deg,#12305f,#1f5eff);color:#fff;border-radius:18px;padding:26px 28px;box-shadow:var(--sh)}
+.hero h1{margin:0 0 6px;font-size:28px;line-height:1.2}
+.hero p{margin:0;opacity:.9}
+.today{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 6px}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--sh)}
+.tcard h3{margin:0 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.tcard .big{font-size:20px;font-weight:700;line-height:1.25}
+.tcard .s{font-size:14px;color:var(--mut);margin-top:4px}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin:18px 0;box-shadow:var(--sh)}
+.sec>h2{margin:0 0 4px;font-size:22px;line-height:1.25}
+.sec h3{font-size:17px;margin:22px 0 6px}
+.sec h4{font-size:15px;margin:16px 0 4px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);background:var(--acc2);padding:2px 8px;border-radius:99px;margin-bottom:6px}
+.lead{color:var(--mut);margin:2px 0 12px}
+ul,ol{padding-left:22px}li{margin:4px 0}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+code{background:var(--code);padding:1px 6px;border-radius:6px;font-size:.9em;word-break:break-word}
+pre{background:var(--code);padding:12px 14px;border-radius:10px;overflow:auto;white-space:pre-wrap;word-break:break-word;font-size:13.5px;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--acc2);font-weight:600}
+.tw{overflow-x:auto}
+tr.click{cursor:pointer}tr.click:hover td{background:var(--acc2)}
+.box{border-radius:12px;padding:12px 14px;margin:12px 0;font-size:15px}
+.box.info{background:var(--acc2)}.box.ok{background:var(--okbg)}.box.warn{background:var(--warnbg)}.box.bad{background:var(--badbg)}
+.box b:first-child{display:block;margin-bottom:2px}
+.ph{background:var(--warnbg);color:var(--warn);padding:0 5px;border-radius:5px;font-weight:600}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;border-radius:9px;font:inherit;font-size:14px;cursor:pointer}
+.btn:hover{border-color:var(--acc);color:var(--acc)}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}.btn.p:hover{color:#fff;opacity:.92}
+.btn.s{font-size:12.5px;padding:4px 10px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.tab{padding:7px 14px;border:1px solid var(--line);border-radius:99px;background:var(--bg);cursor:pointer;font-size:14px;color:var(--ink)}
+.tab.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tab.today{box-shadow:inset 0 0 0 2px var(--ok)}
+.panel{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--bg)}
+.panel h4:first-child{margin-top:0}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:8px 0}
+.kv b{color:var(--mut);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.tl{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 10px}
+.wcard{min-width:170px;flex:1;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px 12px;cursor:pointer}
+.wcard:hover{border-color:var(--acc)}
+.wcard.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc2)}
+.wcard .d{font-weight:700;font-size:18px}.wcard .a{font-size:12.5px;color:var(--mut)}.wcard .t{font-size:13px;margin-top:4px}
+.wcard.past{opacity:.6}.wcard.next{border-color:var(--ok)}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:var(--code);color:var(--mut)}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.w{background:var(--warnbg);color:var(--warn)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.person{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);cursor:pointer}
+.person:hover,.person.on{border-color:var(--acc)}.person b{display:block}.person span{font-size:13px;color:var(--mut)}
+.post{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--bg)}
+.post .ph2{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mut)}
+.post pre{margin:0;background:transparent;border-radius:0 0 12px 12px;font-family:inherit;font-size:15px}
+details{border:1px solid var(--line);border-radius:12px;margin:8px 0;background:var(--bg)}
+summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.chk{list-style:none;padding:0}
+.chk li{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border:1px solid var(--line);border-radius:10px;margin:6px 0;background:var(--bg);cursor:pointer}
+.chk li.done{background:var(--okbg);text-decoration:line-through;color:var(--mut)}
+.chk input{margin-top:5px;accent-color:var(--ok)}
+.bar{height:8px;background:var(--code);border-radius:99px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.flow .st{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);cursor:pointer;font-size:14px}
+.flow .st.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.flow .ar{color:var(--mut)}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}
+input[type=text],input[type=number],select,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+mark{background:#ffe38a;color:#000;border-radius:3px}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(30px);background:#12805c;color:#fff;padding:9px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:60}
+#toast.show{opacity:1;transform:translateX(-50%)}
+#burger{display:none;position:fixed;top:10px;left:10px;z-index:55}
+.top{position:fixed;right:16px;bottom:16px;z-index:40}
+.hide{display:none!important}
+.pt{font-size:12px;color:var(--mut)}
+@media(max-width:900px){.layout{display:block}aside{position:fixed;left:-320px;width:300px;z-index:54;transition:left .25s;box-shadow:var(--sh)}aside.open{left:0}#burger{display:block}main{padding:56px 14px 70px}.today,.row2{grid-template-columns:1fr}.sec{padding:16px 16px}.kv{grid-template-columns:1fr}}
+@media print{aside,#burger,.top,#prog,.btn,.quick{display:none!important}.layout{display:block}.sec{box-shadow:none;break-inside:avoid-page}details{open:true}}
 
-  .page { max-width: 760px; margin: 0 auto; padding: 0 2rem 5rem; }
+a.btn{text-decoration:none;display:inline-block}
+i.hint{color:var(--mut,#666)}
+</style></head><body>
+</style></head><body>
+<div id="prog"></div>
+<button class="btn" id="burger">☰ Меню</button>
+<div class="layout">
+<aside>
+<div class="logo">SMM-тетрадь ИЮР</div>
+<div class="sub">Регламент, пакет, контент-план</div>
+<input id="q" type="search" placeholder="Поиск по всему тексту…" autocomplete="off">
+<div id="qinfo"></div>
+<div class="tools"><button class="btn s" id="expand">Раскрыть всё</button><button class="btn s" id="print">Печать / PDF</button></div>
+<nav id="nav"></nav>
+</aside>
+<header class="hero" id="top">
+<h1>SMM-тетрадь ИЮР</h1>
+<p>Всё для передачи работы в одном файле: пакет передачи, SMM-регламент, контент-план с текстами постов, доступы и рабочие инструменты.</p>
+</header>
 
-  /* HERO */
-  .hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); }
-  .hero-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.75rem; }
-  .hero-name { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--dark); margin-bottom: 0.6rem; }
-  .hero-contacts { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
-  .contact-link { font-size: 14px; color: var(--blue); text-decoration: none; transition: opacity 0.15s; }
-  .contact-link:hover { opacity: 0.7; }
-  .contact-sep { color: var(--border); }
-
-  /* SECTIONS */
-  section { padding: 3rem 0 0; }
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 1.5rem; }
-
-  /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-  .skill-card { background: var(--light); border-radius: 10px; padding: 1rem 1.1rem; }
-  .skill-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
-  .skill-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
-
-  /* JOBS */
-  .jobs { display: flex; flex-direction: column; }
-  .job { padding: 1.5rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 145px 1fr; gap: 0 1.5rem; }
-  .job:last-child { border-bottom: none; }
-  .job-period { font-size: 12px; color: var(--gray); line-height: 1.5; }
-  .job-company { font-size: 13px; font-weight: 600; color: var(--dark); margin-top: 3px; }
-  .job-duration { font-size: 11px; color: var(--gray); margin-top: 2px; }
-  .job-tag { display: inline-block; font-size: 11px; color: var(--blue); background: #EAF0F9; border-radius: 4px; padding: 2px 6px; margin-top: 6px; }
-  .job-role { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
-  .job-bullets { list-style: none; margin: 0; padding: 0; }
-  .job-bullets li { font-size: 14px; color: #444; line-height: 1.6; padding: 2px 0 2px 14px; position: relative; }
-  .job-bullets li::before { content: "–"; position: absolute; left: 0; color: var(--gray); }
-  .job-metrics { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 0.65rem; }
-  .metric { font-size: 12px; font-weight: 600; color: var(--blue); background: #EAF0F9; border-radius: 5px; padding: 3px 8px; }
-
-  /* PORTFOLIO */
-  .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
-  .pcard {
-    border: 1px solid var(--border); border-radius: 12px;
-    padding: 1.1rem 1.15rem;
-    display: flex; flex-direction: column;
-    text-decoration: none; color: inherit;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    min-height: 150px;
-  }
-  .pcard:hover { border-color: var(--blue); box-shadow: 0 2px 12px rgba(27,79,138,0.08); }
-  .pcard-type { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.45rem; }
-  .pcard-title { font-size: 14px; font-weight: 600; color: var(--dark); line-height: 1.4; margin-bottom: 0.4rem; }
-  .pcard-desc { font-size: 13px; color: var(--gray); line-height: 1.5; flex: 1; }
-  .pcard-footer { margin-top: 0.85rem; padding-top: 0.7rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  .pcard-link { font-size: 12px; font-weight: 600; color: var(--blue); }
-  .pcard-note { font-size: 11px; color: #aaa; }
-  .pcard-warn { font-size: 11px; color: #c0392b; margin-top: 5px; }
-
-  /* FOOTER */
-  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-name { font-size: 14px; font-weight: 600; color: var(--dark); }
-  .footer-note { font-size: 13px; color: var(--gray); margin-top: 2px; }
-
-  @media (max-width: 580px) {
-    .job { grid-template-columns: 1fr; }
-    nav { padding: 0 1rem; }
-    .page { padding: 0 1rem 4rem; }
-    .nav-links { gap: 1rem; }
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-inner">
-    <span class="nav-name">Дмитрий Загорук</span>
-    <ul class="nav-links">
-      <li><a href="#skills">Навыки</a></li>
-      <li><a href="#experience">Опыт</a></li>
-      <li><a href="#portfolio">Работы</a></li>
-      <li><a href="#contact">Контакты</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="page">
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-label">Копирайтер · Редактор · Контент-маркетолог · CRM</div>
-    <h1 class="hero-name">Дмитрий Загорук</h1>
-    <div class="hero-contacts" id="contact">
-      <a class="contact-link" href="tel:+79699728310">+7 (969) 972-83-10</a>
-      <span class="contact-sep">·</span>
-      <a class="contact-link" href="mailto:zagorukdmitry@yandex.ru">zagorukdmitry@yandex.ru</a>
-      <span class="contact-sep">·</span>
-      <a class="contact-link" href="https://t.me/dmitry_zagoruk" target="_blank">@dmitry_zagoruk</a>
-      <span class="contact-sep">·</span>
-      <span style="font-size:14px;color:var(--gray);">Удалённо · Частичная занятость</span>
-    </div>
-  </header>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-label">Что умею</div>
-    <div class="skills-grid">
-      <div class="skill-card"><div class="skill-title">Email-копирайтинг</div><div class="skill-desc">B2B и B2C рассылки, темы писем, A/B-тесты, структура по сегментам. Mindbox, Unisender, Mailchimp, Senler.</div></div>
-      <div class="skill-card"><div class="skill-title">Редактура и редполитика</div><div class="skill-desc">Правка по Главреду, tone of voice, стоп-слова, единый стиль коммуникации с нуля.</div></div>
-      <div class="skill-card"><div class="skill-title">Контент для соцсетей</div><div class="skill-desc">Посты, карточки, сторис, адаптация под форматы и аудитории. ВКонтакте, Telegram.</div></div>
-      <div class="skill-card"><div class="skill-title">Лендинги и статьи</div><div class="skill-desc">Продающие и информационные тексты, SEO-оптимизация. Tilda, WordPress.</div></div>
-      <div class="skill-card"><div class="skill-title">Контент-стратегия</div><div class="skill-desc">Контент-план, воронки, медиаплан, ToV и брендбук.</div></div>
-      <div class="skill-card"><div class="skill-title">Аналитика</div><div class="skill-desc">GA4, Яндекс.Метрика, TGStat. Разбор метрик и формулировка гипотез.</div></div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="section-label">Опыт работы</div>
-    <div class="jobs">
-
-      <div class="job">
-        <div>
-          <div class="job-period">Сент. 2025 — сейчас</div>
-          <div class="job-duration">10 месяцев</div>
-          <div class="job-company">НТК Интурист</div>
-          <div class="job-tag">B2B</div>
-        </div>
-        <div>
-          <div class="job-role">Email-копирайтер</div>
-          <ul class="job-bullets">
-            <li>Пишу и редактирую B2B email-рассылки для разных сегментов турагентов</li>
-            <li>Разрабатываю структуру писем и адаптирую контент под целевую аудиторию</li>
-            <li>Работаю с сегментацией и персонализацией коммуникаций в Mindbox</li>
-            <li>Веду редактуру по корпоративной редполитике: структура, tone of voice, единый стиль</li>
-            <li>Разрабатываю гипотезы для A/B-тестов тем писем и анализирую результаты</li>
-          </ul>
-          <div class="job-metrics">
-            <span class="metric">~40 писем в месяц</span>
-            <span class="metric">CTR выше рынка в 4×</span>
-            <span class="metric">Mindbox · A/B-тесты</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="job">
-        <div>
-          <div class="job-period">Янв. 2023 — Авг. 2025</div>
-          <div class="job-duration">2 года 8 месяцев</div>
-          <div class="job-company">Русский стиль</div>
-          <div class="job-tag">B2C · B2B2C</div>
-        </div>
-        <div>
-          <div class="job-role">Интернет-маркетолог / копирайтер</div>
-          <ul class="job-bullets">
-            <li>Писал 12–16 email-рассылок в месяц: open rate 17%, CTR 2,5% — выше среднего по e-commerce</li>
-            <li>Разработал ToV и брендбук, внедрил единый стиль коммуникации</li>
-            <li>Вёл контент для соцсетей, блога и вебинаров — увеличил охваты на 30–40%</li>
-            <li>Привлёк 150–220 лидов с онлайн-ивентов и челленджей при конверсии в заявку 5–7%</li>
-            <li>Участвовал в планировании контента и маркетинговых кампаний</li>
-          </ul>
-          <div class="job-metrics">
-            <span class="metric">Open rate 17%</span>
-            <span class="metric">CTR 2,5%</span>
-            <span class="metric">Охваты +30–40%</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="job">
-        <div>
-          <div class="job-period">Март 2023 — Июнь 2025</div>
-          <div class="job-duration">2 года 4 месяца</div>
-          <div class="job-company">Рисуем вместе</div>
-          <div class="job-tag">EdTech</div>
-        </div>
-        <div>
-          <div class="job-role">Основатель / редактор</div>
-          <ul class="job-bullets">
-            <li>Выстроил редполитику, контент-стратегию и tone of voice проекта с нуля</li>
-            <li>Привлёк 730 учеников через SEO, контент-маркетинг и социальные сети</li>
-            <li>Самостоятельно создавал весь маркетинговый контент: лендинги, email, статьи, соцсети</li>
-            <li>Обеспечил удержание 50% учеников до конца курса</li>
-          </ul>
-          <div class="job-metrics">
-            <span class="metric">730 учеников</span>
-            <span class="metric">Удержание 50%</span>
-            <span class="metric">SEO · email · соцсети</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="job">
-        <div>
-          <div class="job-period">Июнь — Дек. 2024</div>
-          <div class="job-duration">7 месяцев</div>
-          <div class="job-company">Комплето</div>
-          <div class="job-tag">B2B · агентство</div>
-        </div>
-        <div>
-          <div class="job-role">Контент-маркетолог</div>
-          <ul class="job-bullets">
-            <li>Разрабатывал контент-стратегию для корпоративных клиентов</li>
-            <li>Прописывал ToV и единые стандарты коммуникации</li>
-            <li>Писал тексты для соцсетей и email, строил контент-планы</li>
-            <li>Составлял маркетинговые воронки и точки касания</li>
-          </ul>
-          <div class="job-metrics">
-            <span class="metric">B2B IT-контент</span>
-            <span class="metric">jet.su</span>
-            <span class="metric">ToV и стандарты</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="job">
-        <div>
-          <div class="job-period">Февр. — Июль 2023</div>
-          <div class="job-duration">6 месяцев</div>
-          <div class="job-company">Сан-Суши</div>
-          <div class="job-tag">B2C · франшиза</div>
-        </div>
-        <div>
-          <div class="job-role">SMM-менеджер / копирайтер</div>
-          <ul class="job-bullets">
-            <li>Создавал и адаптировал контент под 20 регионов: 15+ единиц контента в день</li>
-            <li>Обеспечивал единый ToV и брендбук во всех каналах</li>
-            <li>Выстроил воронку за 2 месяца: ER 2–4%, 45–60 лидов в месяц</li>
-            <li>Обучал франчайзи работе с контентом, контролировал соответствие стандартам</li>
-          </ul>
-          <div class="job-metrics">
-            <span class="metric">15+ единиц/день</span>
-            <span class="metric">ER 2–4%</span>
-            <span class="metric">20 регионов</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="portfolio">
-    <div class="section-label">Примеры работ</div>
-    <div class="portfolio-grid">
-
-      <a class="pcard" href="https://vk.com/wall-197105797_252577" target="_blank">
-        <div class="pcard-type">SMM · ВКонтакте</div>
-        <div class="pcard-title">Пост для франшизы Сан-Суши</div>
-        <div class="pcard-desc">Контент для федеральной сети с адаптацией под региональную аудиторию. Единый ToV на 20 регионов.</div>
-        <div class="pcard-footer">
-          <span class="pcard-link">Открыть →</span>
-          <span class="pcard-note">vk.com</span>
-        </div>
-      </a>
-
-      <a class="pcard" href="https://jet.su/services/" target="_blank">
-        <div class="pcard-type">B2B · IT · Веб</div>
-        <div class="pcard-title">Тексты для сайта Инфосистемы Джет</div>
-        <div class="pcard-desc">Пересборка текстовой части страницы услуг крупного IT-интегратора. Сложная B2B-тематика, структура под корпоративного клиента.</div>
-        <div class="pcard-footer">
-          <span class="pcard-link">Открыть →</span>
-          <span class="pcard-note">jet.su</span>
-        </div>
-      </a>
-
-      <a class="pcard" href="https://t.me/gallerybuksir/2209" target="_blank">
-        <div class="pcard-type">Telegram · Продажи</div>
-        <div class="pcard-title">Продающее приглашение для онлайн-школы</div>
-        <div class="pcard-desc">Текст для привлечения учеников в онлайн-школу рисования. Конверсионная механика без давления.</div>
-        <div class="pcard-footer">
-          <span class="pcard-link">Открыть →</span>
-          <span class="pcard-note">t.me</span>
-        </div>
-      </a>
-
-      <a class="pcard" href="https://www.instagram.com/p/C0zWCfQNm3v/" target="_blank">
-        <div class="pcard-type">Сценарий · Reels</div>
-        <div class="pcard-title">Сценарий Reels — 2 200 лайков</div>
-        <div class="pcard-desc">Спроектировал структуру, крючок, подачу и финал. Результат — 2 200 лайков на органике.</div>
-        <div class="pcard-footer">
-          <span class="pcard-link">Открыть →</span>
-          <span class="pcard-note">instagram.com</span>
-        </div>
-        <div class="pcard-warn">* Instagram запрещён в РФ</div>
-      </a>
-
-      <a class="pcard" href="https://pikabu.ru/story/rasskazyivayu_i_pokazyivayu_chto_takoe_komplementarnyie_tsveta_a_tsvetovoy_krug_ittena_11667000" target="_blank">
-        <div class="pcard-type">Статья · Пикабу · Органика</div>
-        <div class="pcard-title">Мануал о цветовом круге Иттена — 25 000 просмотров</div>
-        <div class="pcard-desc">Информационная статья о комплементарных цветах и цветовом круге. 25 000 просмотров на органическом трафике.</div>
-        <div class="pcard-footer">
-          <span class="pcard-link">Открыть →</span>
-          <span class="pcard-note">pikabu.ru</span>
-        </div>
-      </a>
-
-      <a class="pcard" href="https://docs.google.com/document/d/1Mr99C--eZFZbM5hPk-CRtlGKMZQAGat-uz3FVEeosFU/edit?usp=sharing" target="_blank">
-        <div class="pcard-type">Редполитика · ToV</div>
-        <div class="pcard-title">Разработка редполитики и tone of voice</div>
-        <div class="pcard-desc">Документ с правилами голоса бренда, стоп-словами, примерами формулировок и стилистическими принципами.</div>
-        <div class="pcard-footer">
-          <span class="pcard-link">Открыть →</span>
-          <span class="pcard-note">Google Docs</span>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="footer-name">Дмитрий Загорук</div>
-      <div class="footer-note">Копирайтер · Удалённо · Частичная занятость</div>
-    </div>
-    <div style="text-align:right;">
-      <a class="contact-link" href="tel:+79699728310" style="font-size:13px;display:block;">+7 (969) 972-83-10</a>
-      <a class="contact-link" href="mailto:zagorukdmitry@yandex.ru" style="font-size:13px;display:block;margin-top:3px;">zagorukdmitry@yandex.ru</a>
-      <a class="contact-link" href="https://t.me/dmitry_zagoruk" target="_blank" style="font-size:13px;display:block;margin-top:3px;">@dmitry_zagoruk</a>
-    </div>
-  </footer>
-
+<div class="today">
+<div class="tcard"><h3>Сегодня</h3><div class="big" id="tdTitle"></div><div class="s" id="tdSub"></div></div>
+<div class="tcard"><h3>Ближайший вебинар</h3><div class="big" id="nwTitle"></div><div class="s" id="nwSub"></div></div>
 </div>
-</body>
-</html>
+<div class="quick">
+<a class="btn p" href="#week">Ритм недели</a>
+<a class="btn" href="#check">Чек-лист перед публикацией</a>
+<a class="btn" href="#utm">UTM-ссылка</a>
+<a class="btn" href="#plan-oct">Контент-план октября</a>
+<a class="btn" href="#report">Отчёт по понедельникам</a>
+</div>
+
+<section class="sec" id="howto" data-part="Старт">
+<span class="tag">Старт</span>
+<h2>Как пользоваться тетрадью</h2>
+<p>Это входная точка для нового SMM-специалиста ИЮР. Здесь собрано всё, что уже сделано по каналу, и всё лежит внутри этого файла: переходить в другие документы не нужно. Читать по порядку необязательно: слева меню, сверху поиск по всему тексту.</p>
+<ol>
+<li>Пройти чек-лист первой недели (ниже) и отметить выполненное: галочки сохраняются в браузере.</li>
+<li>Прочитать регламент (часть 2): как устроен канал, ритм, роли, стандарты, согласование.</li>
+<li>Посмотреть контент-план недели 28.09–02.10 и образец на 5–9 октября (часть 4) и взять их как формат для следующих недель.</li>
+<li>Открыть таблицы советов и кейсов и выбрать материал на следующую неделю.</li>
+</ol>
+<p>После этого назначить созвон с Дмитрием и Эдуардом Каракозовым и разобрать вопросы, которые появились при чтении.</p>
+<div class="box info"><b>Что здесь интерактивное</b>Вкладки дней недели, таймлайн вебинаров (клик по карточке), карточки команды, воронка по шагам, чек-листы с прогрессом, генератор UTM-ссылки, кнопки «Скопировать» у каждого текста поста, шаблон недельного отчёта. Кнопка «Раскрыть всё» в меню слева открывает все сворачиваемые блоки.</div>
+</section>
+
+<section class="sec" id="week1" data-part="Старт">
+<span class="tag">Старт</span>
+<h2>Чек-лист первой недели</h2>
+<p class="lead">Отметки хранятся в вашем браузере на этом устройстве.</p>
+<div class="bar"><i id="pWeek1"></i></div><div class="pt" id="tWeek1"></div>
+<ul class="chk" id="week1List"></ul>
+<button class="btn s" data-reset="week1">Сбросить отметки</button>
+</section>
+
+<!-- ===================== ЧАСТЬ 2. РЕГЛАМЕНТ ===================== -->
+
+<section class="sec" id="goals" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Цели и принципы</h2>
+<p>Канал нужен, чтобы прогревать аудиторию между вебинарами и приводить людей на регистрацию, а не набирать просмотры ради просмотров. Аудитория: руководители и специалисты строительных, проектных и изыскательских компаний.</p>
+<ol>
+<li><b>Один материал в день.</b> Один и тот же контент идёт во все сети без вариантов под каждую площадку.</li>
+<li><b>Каждый пост что-то делает.</b> Перед публикацией понятно, какое действие он должен вызвать: регистрацию, переход, ответ в опросе, обращение.</li>
+<li><b>Факты только из первоисточника.</b> Суммы, сроки и итоги дел проверяются по судебному акту.</li>
+<li><b>Тон профессиональный и по делу.</b> Без запугивания, обещаний результата и сленга. Юмор допустим в скетчах, где он согласован.</li>
+<li><b>Стабильность важнее вдохновения.</b> Материалы выходят строго по плану, даже когда нет идеи для чего-то особенного.</li>
+</ol>
+</section>
+
+<section class="sec" id="scope" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Что входит в работу SMM</h2>
+<ul>
+<li>Ведение канала по контент-плану на неделю.</li>
+<li>Подготовка текстовой основы сценариев роликов: идея, посыл, текст. Сценарии SMM пишет самостоятельно; продюсер Наталья отвечает за референсы и организацию съёмки.</li>
+<li>Создание карточек и баннеров в Figma по брендгайду.</li>
+<li>Кросспостинг на все площадки: Telegram, YouTube, Instagram, VK, Rutube.</li>
+<li>Публикация Reels и Shorts в рамках лимита 15 в месяц; ролики снимают продюсер и монтажёр.</li>
+<li>Синхронизация публикаций с командой: продюсер, монтажёр, контекстолог.</li>
+<li>Ответы на комментарии и сообщения в канале.</li>
+<li>Анализ контента и метрик: охваты, ER, переходы по CTA, выводы по форматам.</li>
+<li>Анализ конкурентов: каналы других игроков ниши.</li>
+<li>Участие в контент-стратегии: темы, форматы, механики вовлечения (опросы, интерактивы).</li>
+<li>Вести второй SMM-канал, запуск которого согласован с Эдуардом (2–3 поста в неделю).</li>
+</ul>
+<p>Стратегия, CTA-архитектура и сайт остаются в зоне Дмитрия. Формат работы: удалённо, по договору с самозанятым.</p>
+<h3>Чего ждут от специалиста</h3>
+<p>Инициативы: предлагать решения и гипотезы, а не только исполнять поручения буквально. Руководство хочет видеть, что контент конвертируется в регистрации и заявки, а не только набирает просмотры. Поэтому для каждого поста стоит понимать, какое действие он должен вызвать и как это измерить.</p>
+<h3 id="schedule">График работы</h3>
+<p>Жёсткой привязки к рабочим часам нет. Важны два условия: контент-план на неделю готов заранее, и специалист на связи в течение дня. По понедельникам проходит еженедельная планёрка; время у неё плавающее и каждый раз согласуется заранее.</p>
+<div class="grid">
+<div class="tcard"><h3>Планёрка</h3><div class="big">Понедельник</div><div class="s">Плавающий слот, согласуется заранее</div></div>
+<div class="tcard"><h3>Отчёт</h3><div class="big">Пн, 10:00</div><div class="s">Вручную: Метрика + соцсети + выводы</div></div>
+<div class="tcard"><h3>Связь</h3><div class="big">В течение дня</div><div class="s">Отвечать на вопросы команды</div></div>
+<div class="tcard"><h3>Обращения аудитории</h3><div class="big">В рабочий день</div><div class="s">Комментарии и личные сообщения</div></div>
+</div>
+</section>
+
+<section class="sec" id="funnel" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Воронка и CTA</h2>
+<p>Канал не самостоятельная витрина, а верхняя часть воронки вебинаров. ИЮР продаёт юридические услуги по досудебному и судебному разрешению споров для строительной отрасли (заказчики, подрядчики, проектировщики, изыскатели). Нажимайте на шаги, чтобы увидеть детали.</p>
+<div class="flow" id="flow"></div>
+<div class="panel" id="flowBox"></div>
+<h3>Вебинары</h3>
+<p>Примерно четыре в месяц, по четвергам в 17:00 по Москве. Каждый под свой сегмент: строители, проектировщики, изыскатели, иногда общий поток. Под каждый вебинар отдельный лендинг на Тильде по шаблону <code>urreshenie.ru/&lt;тема&gt;-webinar-&lt;дд-мм-гггг&gt;</code>, регистрация идёт через MTS Link. Для планирования берётся около 50 участников на эфир. Спикер по умолчанию Эдуард Каракозов, о приглашённых гостях договариваются заранее.</p>
+<h3>Воронка в Bitrix24</h3>
+<p>Регистрация, предквалификация, постквалификация, затем «В работе», «Встреча» или «Отложенный спрос».</p>
+<h3>Как устроен CTA</h3>
+<p>Три маршрута. Устный CTA спикера без слайда на экране ловит острую проблему аудитории и ведёт на посадочную страницу-разбор темы. Оттуда человек попадает на страницу решений с раздельными кнопками под шесть продуктов: <code>consultation_30</code>, <code>express_20</code>, <code>audit_100</code>, <code>support</code>, <code>court</code>, <code>free_meeting</code>. У каждой кнопки своё аналитическое событие и UTM-разметка по каналам. Финальный CTA всегда ведёт на узкий конкретный вход (например, на конкретную консультацию), а не сразу на страницу со всем списком услуг. Страница услуг существует (<a href="https://urreshenie.ru/uslugi" target="_blank" rel="noopener">urreshenie.ru/uslugi</a>, шесть форматов работы с ценами), но в основном меню её нет.</p>
+<h3>Форма регистрации</h3>
+<p>Единая, универсальная под все темы, её не пересобирают каждую неделю. Разница между темами закладывается в заголовок и текст страницы. Известная проблема: на форме регистрации больше всего людей отваливается на поле «Телефон»; решением занимается Дмитрий, SMM это знать полезно, но задача вне его зоны.</p>
+<h3>Карта вебинара</h3>
+<p>Для каждого вебинара заранее и синхронно готовятся: лендинг на Тильде, анонсы, CTA-текст спикера, форма регистрации, чек-лист как лид-магнит и ссылка на один предыдущий тематический пост из канала (мостик, см. «Источники контента»).</p>
+</section>
+
+<section class="sec" id="sources" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Источники контента</h2>
+<p>Почти весь контент не пишется с нуля, а собирается из накопленных материалов компании.</p>
+<div class="grid">
+<a class="tcard" style="text-decoration:none;color:inherit" href="https://docs.google.com/spreadsheets/d/1F2GlvRasYDpOuF_NXgLJgF4OSfkyjTGXC83C5R9Vu5s/edit" target="_blank" rel="noopener"><h3>Таблица</h3><div class="big">Советы</div><div class="s">≈42 неиспользованных · открыть ↗</div></a>
+<a class="tcard" style="text-decoration:none;color:inherit" href="https://docs.google.com/spreadsheets/d/1FAq-Ls5GIWOs9YxQuyEcdc_eAQA0h6gTxJ8KscqnuBA/edit" target="_blank" rel="noopener"><h3>Таблица</h3><div class="big">Кейсы</div><div class="s">≈43 неиспользованных · открыть ↗</div></a>
+</div>
+<h3>Советы</h3>
+<p>Стандартная рубрика канала. Тексты советов и кейсов пишет SMM. Эдуард Каракозов делится делами и советами: присылает краткие формулировки, из которых SMM разбирает материал, пишет текст и оформляет карточку и пост. Банк можно пополнять по запросу у Эдуарда. Накоплен банк около 42 неиспользованных пронумерованных советов (например, «Совет №23», «Совет №116»), можно брать заранее. Колонки таблицы: № в списке, рубрика, текст совета, статус, где опубликован.</p>
+<h3>Кейсы</h3>
+<p>Реальные судебные дела. Часть уже оформлена и лежит в банке (около 43 неиспользованных), часть приходится добирать из открытой судебной практики (номер дела, арбитражный суд) под тему недели. Текст кейса пишет SMM. Фактуру даёт Эдуард (он делится делами, по запросу банк пополняется), иногда юристы, иногда SMM собирает сам из практики. Колонки таблицы: год, дело (по разделу «Дела» на сайте), статус, где использован в Telegram. Номера дела в таблице нет, его берут в разделе «Дела» на сайте и сверяют с судебным актом до публикации.</p>
+<div class="box warn"><b>Цифры кейса проверяются по постановлению суда, а не по заголовку дела</b>Заголовок может не совпадать с исходом. Пример: в деле А05-8567/2024 иск удовлетворён частично (из 10 требований только одно), поэтому «иск отклонён полностью» писать нельзя. Если иск удовлетворён частично, так и пишется, с числом удовлетворённых требований.</div>
+<h3>Опросы</h3>
+<p>Держатся широкими, привязанными к общей практике ИЮР по строительным спорам, а не узко к теме вебинара недели: так собирается общая реакция аудитории, а не только сегмента этой недели. Это требование Эдуарда. Берутся из реальных вопросов подписчиков и участников вебинаров. Пример утверждённого опроса: «Сталкивались с расхождением объёмов выполненных работ между собственными расчётами и расчётами вашего заказчика?» с вариантами «Да, дошло до спора», «Было, но разошлись мирно», «Никогда не сталкивались», «Не в теме».</p>
+<h3>Вопросы аудитории</h3>
+<p>Реальные вопросы подписчиков и участников вебинаров: мониторить комментарии, чат вебинара и личные обращения, подходящие вопросы откладывать про запас для опросов, советов и тем.</p>
+<h3>Мостик к следующим вебинарам</h3>
+<p>При подготовке карты вебинара заранее подбирается один конкретный пост из канала на близкую тему, чтобы в конце вебинара сослаться на него прямой ссылкой, а не абстрактным «смотрите в канале». Это отдельный шаг в подготовке, а не дело вдохновения.</p>
+</section>
+
+<section class="sec" id="week" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Недельный цикл</h2>
+<p>Вебинары идут по четвергам в 17:00 по Москве, запись выходит в пятницу. Контент недели строится вокруг ближайшего вебинара. Это действующий ритм из Паспорта канала. Вторник чередуется: неделю совет, неделю кейс (29.09 вышел кейс, поэтому 06.10 совет).</p>
+<div class="tabs" id="dayTabs"></div>
+<div class="panel" id="dayBox"></div>
+<h3>Сводная таблица</h3>
+<div class="tw"><table>
+<tr><th>День</th><th>Что публикуется</th><th>Что готовится заранее</th></tr>
+<tr><td>Понедельник</td><td>Видеокружок с анонсом вебинара, он же ролик недели для YouTube, Instagram, VK, Rutube</td><td>Планёрка (плавающий слот); контент-план недели утверждён</td></tr>
+<tr><td>Вторник</td><td>Совет или кейс (чередуются по неделям)</td><td>Карточка по таблице советов или кейсов</td></tr>
+<tr><td>Среда</td><td>Опрос</td><td>Формулировка опроса в рамках общей практики по строительным спорам</td></tr>
+<tr><td>Четверг</td><td>Напоминание о вебинаре и карточка с чек-листом</td><td>Проверка лендинга и ссылки с UTM</td></tr>
+<tr><td>Пятница</td><td>Запись вебинара на YouTube; в остальных сетях ссылка и текст чек-листа</td><td>Обложка и элементы стиля в записи</td></tr>
+</table></div>
+<p><b>Когда что готово.</b> Контент-план на неделю готов к планёрке в понедельник. Тексты совета и кейса, а также карточки готовятся минимум за день до публикации, чтобы оставалось время на согласование. Краткую формулировку совета на вторник Эдуард присылает до понедельника, текст и карточку делает SMM.</p>
+<p><b>Связь.</b> Жёсткой привязки к рабочим часам нет, но в течение дня специалист остаётся на связи и отвечает на вопросы команды.</p>
+<details><summary>Модель «тема недели»: обсуждается, пока не утверждена</summary><div>
+<p>Отдельно в обсуждении с Эдуардом лежит другая модель: каждая неделя держит один сквозной сюжет вокруг темы ближайшего вебинара. В понедельник раскрывается проблема, в четверг та же тема подаётся шуткой или лёгкой подачей. В среду пост по реальному вопросу подписчика или участника вебинара. В пятницу два поста: текстовая запись и видеокружок «Результаты недели», не привязанный к теме недели. Кроме того, с каждого офлайн-мероприятия (например, «Закрытая стратегическая сессия для руководителей») снимается три единицы контента: до, во время и после. Объём продакшна при такой модели почти удваивается, кросспостинг остаётся единственной экономией времени.</p>
+<div class="box warn"><b>Статус нужно подтвердить</b>Бриф называет эту модель уже пересобранной, а Паспорт держит её в списке предложений. Пока действует ритм «один материал в день» из этого раздела.</div>
+</div></details>
+</section>
+
+<section class="sec" id="standards" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Стандарты контента и оформления</h2>
+<h3>Карточки</h3>
+<ul>
+<li>Заголовок дублируется только на карточке и в тексте поста и нигде не переформулируется.</li>
+<li>Кейс: три блока — претензия, расходы, финансовый результат.</li>
+<li>Совет: два уровня — короткий тезис и развёрнутая часть.</li>
+<li>Эмодзи для реакций: ❤️ 🔥 👀. Другие только по согласованию.</li>
+<li>Статичные карточки репостятся в ленту Instagram как есть, отдельные видео под каждую сеть не делаются.</li>
+</ul>
+<div class="grid" style="margin-top:10px">
+<div class="tcard"><h3>Карточка кейса</h3><div class="s"><b>1.</b> Претензия<br><b>2.</b> Расходы<br><b>3.</b> Финансовый результат</div></div>
+<div class="tcard"><h3>Карточка совета</h3><div class="s"><b>Верх:</b> короткий тезис (как заголовок поста)<br><b>Низ:</b> развёрнутая часть, пояснение и практический шаг</div></div>
+<div class="tcard"><h3>Реакции</h3><div class="big">❤️ 🔥 👀</div><div class="s">Другие только по согласованию</div></div>
+</div>
+<h3>Кейсы и советы</h3>
+<ul>
+<li>Номер дела и итог проверяются по постановлению суда. Если иск удовлетворён частично, так и пишется, с числом удовлетворённых требований.</li>
+<li>Тематика под вебинар недели и его сегмент аудитории (строители, проектировщики или изыскатели): совет и кейс подбираются так, чтобы поддерживать тему четверга и попадать в интересы этого сегмента.</li>
+</ul>
+<h3>Ссылки</h3>
+<ul>
+<li>Все ссылки на лендинги вебинаров идут с UTM: <code>utm_source=telegram</code>, <code>utm_medium=social</code>, <code>utm_campaign=webinar_&lt;тема&gt;_&lt;ддммгггг&gt;</code>, <code>utm_content=post</code>. Голая ссылка без меток не публикуется.</li>
+<li>Адрес лендинга вебинара: <code>urreshenie.ru/&lt;тема&gt;-webinar-&lt;дд-мм-гггг&gt;</code>.</li>
+<li>В пост идёт ссылка на лендинг, а не прямая на MTS Link.</li>
+</ul>
+<p>Пример: <code>urreshenie.ru/dnouglublenie-webinar-13-08-2026?utm_source=telegram&amp;utm_medium=social&amp;utm_campaign=webinar_dnouglublenie_13082026&amp;utm_content=post</code>. Собрать свою ссылку можно в <a href="#utm">генераторе ниже</a>.</p>
+<h3>Видео</h3>
+<ul>
+<li>Не больше 15 роликов в месяц во всех сетях.</li>
+<li>Ролики бывают двух типов: серьёзный с крючком «риск денег, суда, документов» и юмористический скетч. Сценарии пишет SMM, съёмку организует продюсер.</li>
+<li>Запись вебинара выходит в пятницу той же недели, до публикации добавляются обложка и элементы стиля.</li>
+</ul>
+</section>
+
+<section class="sec" id="team" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Команда: кто за что отвечает</h2>
+<p class="lead">Зоны разведены, чтобы не дублировать работу и не путать, к кому идти с вопросом. Нажмите на карточку.</p>
+<div class="grid" id="teamGrid"></div>
+<div class="panel hide" id="teamBox" style="margin-top:12px"></div>
+</section>
+
+<section class="sec" id="tools" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Площадки и инструменты</h2>
+<h3>Площадки, где работает SMM</h3>
+<ul>
+<li>Telegram-канал <a href="https://t.me/urfundament" target="_blank" rel="noopener">@urfundament</a> (около 5000 подписчиков): основная площадка.</li>
+<li><a href="https://www.youtube.com/@ur_fundament" target="_blank" rel="noopener">YouTube</a>: записи вебинаров и Shorts. Доступ через Эдуарда.</li>
+<li><a href="https://vkvideo.ru/@club233910219" target="_blank" rel="noopener">VK Видео</a>: доступ через Эдуарда.</li>
+<li>Instagram и Rutube: доступ выдаёт Дмитрий (см. «Доступы»).</li>
+<li>Сайт: <a href="https://urreshenie.ru" target="_blank" rel="noopener">urreshenie.ru</a>.</li>
+<li>Яндекс.Метрика для сайта: источник данных для недельного отчёта.</li>
+<li>Figma: карточки и баннеры по брендгайду.</li>
+</ul>
+<h3>Инструменты команды, доступ к которым SMM не нужен</h3>
+<ul>
+<li>MTS Link: проведение вебинаров и регистрация.</li>
+<li>Тильда: лендинги вебинаров и сайт.</li>
+<li>Bitrix24: CRM, воронка сделок, умные сценарии для email-цепочек.</li>
+<li>telega.in: каталог и аналитика для посевов, внутренняя рабочая таблица с историей размещений и вердиктами «масштабировать / пересмотреть / не закупать повторно».</li>
+<li>Unisender и Bitrix24: два канала email-рассылок (массовые и точечные).</li>
+</ul>
+<p>SMM нужно понимать, как они связаны с воронкой, но работать в них он не будет.</p>
+</section>
+
+<section class="sec" id="metrics" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Метрики</h2>
+<ul>
+<li>Стабильность выхода контента точно по недельному плану: самостоятельный KPI, отдельно от охватов.</li>
+<li>Охват, вовлечённость (ER), динамика подписчиков, переходы по ссылкам.</li>
+<li>Конверсия страницы решений и прирост новых контактов в CRM: по ним команда позже сверяет, сработала ли перестройка процессов.</li>
+<li>Стоимость регистрации и переходов по посевным каналам отслеживается отдельно от органики канала. Формат отчётов по посевам: KPI-блок, графики, сгруппированные таблицы по каналам, выводы.</li>
+<li>MTS Link не отдаёт источник регистрации, поэтому результат воронки считается по переходам на лендинг.</li>
+</ul>
+</section>
+
+<section class="sec" id="check" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Чек-лист перед публикацией</h2>
+<p class="lead">Проходите его перед каждым постом. Каждый пост перед публикацией утверждает Дмитрий.</p>
+<div class="bar"><i id="pCheck"></i></div><div class="pt" id="tCheck"></div>
+<ul class="chk" id="checkList"></ul>
+<button class="btn s" data-reset="check">Сбросить перед новым постом</button>
+</section>
+
+<section class="sec" id="audience" data-part="Регламент">
+<span class="tag">Регламент</span>
+<h2>Аудитория, согласование, отчётность</h2>
+<h3>Комментарии и вопросы аудитории</h3>
+<ul>
+<li>Комментарии, чат вебинара и личные сообщения просматриваются ежедневно.</li>
+<li>Вопросы по существу дела не решаются в комментариях: человека ведут на консультацию или CTA вебинара, юридических рекомендаций в комментариях не даётся.</li>
+<li>Повторяющиеся вопросы собираются как идеи для опросов, советов и тем вебинаров.</li>
+<li>Негатив и спам передаются Дмитрию, без спора в открытой ветке.</li>
+<li>На обращения отвечают в течение рабочего дня.</li>
+</ul>
+<h3>Согласование</h3>
+<ul>
+<li>Экспертные материалы (советы, кейсы) SMM пишет по краткому материалу Эдуарда Каракозова, юридическую часть уточняет у него.</li>
+<li>Стратегия, ритм и крупные изменения плана согласуются с Дмитрием.</li>
+<li>Каждый пост перед публикацией утверждает Дмитрий.</li>
+</ul>
+<h3>Отчётность</h3>
+<ul>
+<li>Раз в неделю, по понедельникам в 10:00, SMM присылает отчёт. Он собирается вручную, не автоматически, и включает два блока: данные Яндекс Метрики (переходы на лендинги вебинаров по каналам и целям, сравнение с прошлой неделей) и данные по соцсетям (охваты, вовлечённость, что сработало, какие рубрики и форматы ведут трафик), плюс выводы.</li>
+<li>Отдельно фиксируется выполнение плана публикаций: это самостоятельный KPI.</li>
+<li>Регистрации и переходы с посевов ведёт отдельно посевщик, в отчёт по SMM они не смешиваются.</li>
+</ul>
+<p>Заготовка отчёта с генератором текста есть в разделе <a href="#report">«Еженедельный отчёт»</a>.</p>
+<div class="box warn"><b>Доступы</b>Пароли не передаются в чатах и документах. Их выдаёт Дмитрий или Эдуард лично или через менеджер паролей.</div>
+</section>
+
+<!-- ===================== ЧАСТЬ 3. ПАКЕТ ПЕРЕДАЧИ ===================== -->
+
+<section class="sec" id="webinars" data-part="Пакет передачи">
+<span class="tag">Пакет передачи</span>
+<h2>Вебинары и расписание</h2>
+<p>Впереди пять вебинаров (в ленте также два недавних), каждый по четвергам в 17:00 по Москве. Контент недели строится вокруг ближайшего вебинара. Нажмите на карточку, чтобы увидеть, что подготовить.</p>
+<div class="tl" id="wl"></div>
+<div class="panel" id="wBox"></div>
+<p class="pt">Обычно ИЮР проводит около четырёх вебинаров в месяц. Регистрации по источникам в MTS Link не видны, поэтому оценка посевов идёт по переходам, а не по регистрациям.</p>
+<h3>Комплект на каждый вебинар</h3>
+<ol>
+<li>Лендинг на Тильде по шаблону <code>urreshenie.ru/&lt;тема&gt;-webinar-&lt;дд-мм-гггг&gt;</code>.</li>
+<li>Чек-лист «5 шагов/ошибок/документов» по теме вебинара как лид-магнит.</li>
+<li>Анонс, напоминание и пост с записью с UTM-метками.</li>
+<li>Карточка вебинара со ссылкой на один тематический пост из канала (мостик).</li>
+</ol>
+</section>
+
+<section class="sec" id="video" data-part="Пакет передачи">
+<span class="tag">Пакет передачи</span>
+<h2>Видео и рилсы</h2>
+<p>Видео идёт отдельной линией и не привязано к дневному ритму постов. Потолок: не больше 15 роликов в месяц во всех сетях. На вебинарную неделю планируется два ролика: серьёзный с крючком про риск денег и юмористический скетч.</p>
+<ul>
+<li>Ролики нарезаются из реальных съёмок вебинаров и оффлайн-мероприятий, постановочные ролики общего характера не делаются.</li>
+<li>Приглашение на вебинар в формате кружка: запрос делается до пятницы, публикация в понедельник. Это для Telegram; желательно запросить раньше, чтобы передать кружок монтажёру и он отдал уже рилс. Видеокружки записывает Екатерина, в пятницу она говорит, что можно публиковать.</li>
+<li>Продюсер Наталья отвечает за референсы и логистику съёмок, сценарии не пишет: их пишет SMM. Есть образец, как делать сценарии.</li>
+<li>Запись вебинара выходит на YouTube в пятницу, обложка и элементы фирменного стиля в видео добавляются перед публикацией SMM-специалистом. Шаблоны есть.</li>
+<li>Видеокружок в понедельник является одновременно анонсом и роликом недели для YouTube, Instagram, VK и Rutube, отдельная съёмка под каждую сеть не нужна.</li>
+</ul>
+</section>
+
+<section class="sec" id="access" data-part="Пакет передачи">
+<span class="tag">Пакет передачи</span>
+<h2>Доступы и медиа</h2>
+<div class="box warn"><b>Пароли в документе не хранятся</b>Их передают лично или через менеджер паролей.</div>
+<div class="tw"><table>
+<tr><th>Площадка</th><th>Как получить доступ</th></tr>
+<tr><td>Telegram-канал @urfundament</td><td>Уточнить у Дмитрия, кто сейчас администратор</td></tr>
+<tr><td>YouTube</td><td>Через Эдуарда Каракозова</td></tr>
+<tr><td>VK</td><td>Через Эдуарда Каракозова</td></tr>
+<tr><td>Rutube</td><td>Вход по номеру телефона, код подтверждения запрашивается у Кристины; номер выдаёт Дмитрий</td></tr>
+<tr><td>Instagram</td><td>Логин и пароль выдаёт Дмитрий; аккаунт привязан к рабочей почте Екатерины Рубашкиной, при входе может прийти код на неё</td></tr>
+<tr><td>Тильда, MTS Link, Bitrix24, telega.in</td><td>SMM не нужны: этими сервисами пользуются другие члены команды</td></tr>
+</table></div>
+<h3>Ссылки на площадки</h3>
+<div class="quick">
+<a class="btn" href="https://t.me/urfundament" target="_blank" rel="noopener">Telegram @urfundament ↗</a>
+<a class="btn" href="https://www.youtube.com/@ur_fundament" target="_blank" rel="noopener">YouTube ↗</a>
+<a class="btn" href="https://vkvideo.ru/@club233910219" target="_blank" rel="noopener">VK Видео ↗</a>
+<a class="btn" href="https://urreshenie.ru" target="_blank" rel="noopener">Сайт urreshenie.ru ↗</a>
+<a class="btn" href="https://urreshenie.ru/uslugi" target="_blank" rel="noopener">Страница услуг ↗</a>
+</div>
+<h3>Фото и видео для карточек и роликов (Яндекс Диск)</h3>
+<div class="quick">
+<a class="btn" href="https://disk.yandex.ru/d/jv0KBIXSTDKWRw" target="_blank" rel="noopener">Фото со стройки ↗</a>
+<a class="btn" href="https://disk.yandex.ru/d/ooKRs0b9CHGSWQ" target="_blank" rel="noopener">Фото офиса ↗</a>
+<a class="btn" href="https://disk.yandex.ru/d/Gs2EnxBqWhECVA" target="_blank" rel="noopener">Фото, 24.07 ↗</a>
+<a class="btn" href="https://disk.yandex.ru/d/FEIoB1WFzdR0FA" target="_blank" rel="noopener">Подборка 1 ↗</a>
+<a class="btn" href="https://disk.yandex.ru/d/n7pSHO4ZRLVrCg" target="_blank" rel="noopener">Подборка 2 ↗</a>
+<a class="btn" href="https://disk.yandex.ru/d/h0dfel_ylBAd5Q" target="_blank" rel="noopener">Подборка 3 ↗</a>
+<a class="btn" href="https://disk.yandex.ru/d/f_7Px1C_quj4iQ" target="_blank" rel="noopener">Подборка 4 ↗</a>
+</div>
+</section>
+
+<section class="sec" id="learn" data-part="Пакет передачи">
+<span class="tag">Пакет передачи</span>
+<h2>Учебные материалы</h2>
+<p>Подборка статей для базы; читать не обязательно всё сразу, можно возвращаться к блокам, когда встречается конкретная задача.</p>
+<div id="learnBox"></div>
+</section>
+
+<!-- ===================== ЧАСТЬ 4. КОНТЕНТ-ПЛАН ===================== -->
+
+<section class="sec" id="plan-now" data-part="Контент-план">
+<span class="tag">Контент-план</span>
+<h2>Текущая неделя: 28.09–02.10.2026</h2>
+<p>Неделя работает на вебинар 01.10 «Ошибки в техническом задании и исходных данных» и закрывает просроченную запись вебинара 25.09. Понедельник шёл двумя постами, дальше обычный ритм. Это образец формата: следующие недели строятся так же. Нажмите на строку, чтобы перейти к тексту.</p>
+<div class="tw"><table>
+<tr><th>День</th><th>Формат</th><th>Содержание</th><th>Площадки</th><th>Ответственный</th></tr>
+<tr class="click" data-go="p-anons1"><td>Пн 28.09</td><td>Видео-кружок-анонс</td><td>Анонс вебинара 01.10, серьёзный fear-hook. Тот же файл идёт как Reels/Shorts/Клип</td><td>TG, YouTube, Instagram, VK, Rutube</td><td>Наталья (съёмка) → монтажёр</td></tr>
+<tr class="click" data-go="p-rec25"><td>Пн 28.09</td><td>Пост с записью</td><td>Запись вебинара 25.09 про банкротство заказчика</td><td>Все площадки</td><td>SMM</td></tr>
+<tr><td>Вт 29.09</td><td>Кейс (вышел)</td><td>Совет и кейс чередуются: 29.09 вышел кейс, поэтому следующий вторник (06.10) совет</td><td>Все площадки</td><td>SMM</td></tr>
+<tr class="click" data-go="p-poll1"><td>Ср 30.09</td><td>Опрос</td><td>Причины споров с заказчиком</td><td>TG</td><td>SMM</td></tr>
+<tr class="click" data-go="p-rem1"><td>Чт 01.10</td><td>Напоминание + карточка с чек-листом</td><td>День вебинара, 17:00 Мск</td><td>Все площадки</td><td>SMM</td></tr>
+<tr><td>Пт 02.10</td><td>Запись вебинара 01.10</td><td>Выгрузка на YouTube, ссылка и чек-лист на остальные площадки</td><td>Все площадки</td><td>Монтажёр → SMM</td></tr>
+<tr><td>В течение недели</td><td>Юмористический Reels/Shorts</td><td>Второй ролик недели по плану 2 шт/нед</td><td>Все площадки</td><td>Наталья</td></tr>
+</table></div>
+<p>По капу Reels/Shorts: два ролика этой недели укладываются в лимит 15 в месяц. На сентябрь–октябрь 2026 запланировано два ролика в неделю (один серьёзный fear-hook и один юмористический), около 16 за 8 недель.</p>
+
+<h3>Приглашение на вебинар 1 октября</h3>
+<p>Идёт в понедельник подписью к видео-кружку и дублируется на остальных площадках. Заголовок совпадает с заголовком на карточке.</p>
+<div class="post" id="p-anons1"><div class="ph2"><span>Анонс · вебинар 01.10 · все площадки</span><button class="btn s" data-copy="c-anons1">Скопировать</button></div>
+<pre id="c-anons1">Ошибки в техническом задании и исходных данных: кто отвечает за переделку проекта, дополнительные работы и нарушение сроков
+
+Заказчик передал неполные исходные данные. Или поменял задание на полпути. Проект уходит на переделку, сроки едут, объём растёт — а платить за это никто не собирается.
+
+1 октября разберём, где заканчивается ваша ошибка и начинается работа, которую обязаны оплатить.
+
+На вебинаре:
+— кто отвечает за ошибки и недостатки ТЗ и исходных данных
+— где заканчивается исправление своей ошибки и начинаются дополнительные работы
+— как доказать увеличение объёма, стоимости и сроков и получить оплату
+
+Кому полезно: руководителям проектных организаций, ГИП и ГАП, техническим директорам, руководителям проектов, договорникам и юристам.
+
+1 октября, 17:00 Мск. Онлайн, бесплатно. 30 минут практики и ответы на вопросы.
+
+Каждому участнику — чек-лист «5 действий проектировщика при обнаружении ошибок или изменений в техническом задании и исходных данных, чтобы не потерять деньги и сроки».
+
+Регистрация по ссылке
+https://urreshenie.ru/tz-ishodnye-dannye-webinar-01-10-2026?utm_source=telegram&utm_medium=social&utm_campaign=webinar_tz_01102026&utm_content=post</pre></div>
+<p class="pt">Ссылка для поста — лендинг с UTM, а не прямая на MTS Link. Реакции под пост: 🔥 👀</p>
+
+<h3>Запись вебинара 25 сентября</h3>
+<p>Второй пост понедельника. Запись просрочена на два дня: по ритму должна была выйти в пятницу 26.09.</p>
+<div class="post" id="p-rec25"><div class="ph2"><span>Запись · вебинар 25.09 · все площадки</span><button class="btn s" data-copy="c-rec25">Скопировать</button></div>
+<pre id="c-rec25">Заказчик уходит в банкротство: что делать подрядчику и как получить деньги за выполненные работы
+
+Выложили запись совместного вебинара с адвокатом Хусейном Тухашевым.
+
+Главное, что разобрали: попасть в реестр кредиторов и получить деньги — две разные задачи. Исход решается тем, что подрядчик успел оформить до введения процедуры, а не после.
+
+Если у вашего заказчика появились признаки неплатёжеспособности — посмотрите запись до того, как подавать требование.
+
+Смотреть запись
+https://my.mts-link.ru/j/Urreshenie/25274861824/record-new/24723859723</pre></div>
+<p class="pt">Реакции под пост: 🔥 👀</p>
+
+<h3>Опрос, среда 30.09</h3>
+<p>Тема широкая, по общей практике ИЮР, а не под тему недели, по требованию Эдуарда.</p>
+<div class="post" id="p-poll1"><div class="ph2"><span>Опрос · Telegram</span><button class="btn s" data-copy="c-poll1">Скопировать</button></div>
+<pre id="c-poll1">Из-за чего чаще всего возникают споры с вашим заказчиком?
+
+• Оплата выполненных работ
+• Сроки и неустойка
+• Объём и дополнительные работы
+• Качество и замечания к результату</pre></div>
+
+<h3>Напоминание, четверг 01.10</h3>
+<p>Выходит утром вместе с карточкой чек-листа.</p>
+<div class="post" id="p-rem1"><div class="ph2"><span>Напоминание · вебинар 01.10 · все площадки</span><button class="btn s" data-copy="c-rem1">Скопировать</button></div>
+<pre id="c-rem1">Сегодня в 17:00 — вебинар «Ошибки в техническом задании и исходных данных»
+
+Разберём, кто отвечает за переделку проекта, дополнительные работы и нарушение сроков, когда заказчик передал неполные исходные данные или поменял задание на полпути.
+
+Участники получат чек-лист «5 действий проектировщика при обнаружении ошибок или изменений в техническом задании и исходных данных, чтобы не потерять деньги и сроки».
+
+Успеваете присоединиться — регистрация по ссылке
+https://urreshenie.ru/tz-ishodnye-dannye-webinar-01-10-2026?utm_source=telegram&utm_medium=social&utm_campaign=webinar_tz_01102026&utm_content=post</pre></div>
+<p class="pt">Реакции под напоминание: 🔥</p>
+<div class="box info"><b>Открытые вопросы по этой неделе</b>
+<ul>
+<li>Краткая формулировка совета на вторник от Эдуарда нужна до понедельника, текст и карточку делает SMM.</li>
+<li>Сценарий видео-кружка и юмористического ролика: съёмка до понедельника.</li>
+<li>Ссылки на YouTube, ВКонтакте и Rutube для плавающего блока на сайте: сейчас заглушки.</li>
+<li>Ссылка на запись 10.09: сейчас без номера записи в конце и совпадает по ID мероприятия с 17.09, есть риск, что ведёт не на ту запись.</li>
+</ul></div>
+</section>
+
+<section class="sec" id="plan-oct" data-part="Контент-план">
+<span class="tag">Контент-план</span>
+<h2>Образец плана: октябрь 2026, с 05.10</h2>
+<p>Образец плана на неделю 5–9 октября вокруг вебинара 8 октября и каркас на оставшиеся недели месяца по действующему ритму.</p>
+<h3>Неделя 5–9 октября</h3>
+<p>Вебинар 08.10 в 17:00 по Москве: «Как исполнителю расторгнуть проблемный договор с заказчиком и получить деньги за выполненные работы». Аудитория: строители, проектировщики, изыскатели. Нажмите на строку, чтобы перейти к тексту.</p>
+<div class="tw"><table>
+<tr><th>День</th><th>Материал</th><th>Содержание</th><th>Что подготовить</th></tr>
+<tr class="click" data-go="p-anons2"><td>Пн 05.10</td><td>Видеокружок-анонс</td><td>Эдуард в 30–60 секунд объясняет, о чём вебинар и что получит участник; тот же файл идёт как Shorts/Reels/клип</td><td>Ссылка на лендинг с UTM, текст поста, обложка</td></tr>
+<tr class="click" data-go="p-advice"><td>Вт 06.10</td><td>Совет</td><td>Тема под вебинар недели и его сегмент; текст пишет SMM по краткой формулировке Эдуарда, тезис можно выбрать из таблицы советов</td><td>Краткая формулировка от Эдуарда до понедельника, текст SMM, двухуровневая карточка</td></tr>
+<tr class="click" data-go="p-poll2"><td>Ср 07.10</td><td>Опрос</td><td>«Чем чаще всего заканчиваются ваши споры с заказчиком?» Варианты: Договариваемся до суда; Доходит до суда; Уступаем и не спорим; Споров не бывает</td><td>Текст опроса, сбор вопросов из комментариев для вебинара</td></tr>
+<tr class="click" data-go="p-rem2"><td>Чт 08.10</td><td>Напоминание и чек-лист</td><td>Утреннее напоминание о вебинаре в 17:00; карточка с чек-листом по теме вебинара</td><td>Ссылка на регистрацию с UTM, карточка чек-листа</td></tr>
+<tr class="click" data-go="p-rec2"><td>Пт 09.10</td><td>Запись вебинара</td><td>Запись на YouTube; в Telegram, VK и других сетях ссылка и текст чек-листа</td><td>Обложка и элементы стиля в записи, тексты постов, мостик на следующий вебинар (15.10, изыскатели)</td></tr>
+</table></div>
+
+<h3>Приглашение на вебинар 8 октября</h3>
+<p>Идёт в понедельник 05.10 подписью к видео-кружку и дублируется на остальных площадках. Заголовок совпадает с заголовком на карточке. Программу и название чек-листа нужно сверить с лендингом.</p>
+<div class="post" id="p-anons2"><div class="ph2"><span>Анонс · вебинар 08.10 · все площадки</span><button class="btn s" data-copy="c-anons2">Скопировать</button></div>
+<pre id="c-anons2">Как исполнителю расторгнуть проблемный договор с заказчиком и получить деньги за выполненные работы
+
+Заказчик тянет с оплатой, придирается к качеству, меняет условия на ходу. Работать по такому договору невыгодно, а расторгнуть его неправильно значит остаться без денег за уже сделанное.
+
+8 октября разберём, как расторгнуть договор и сохранить право на оплату.
+
+На вебинаре:
+— когда исполнитель вправе расторгнуть договор и чем рискует при ошибке
+— как оформить уведомление о расторжении, чтобы не дать заказчику повода для спора
+— как подтвердить выполненные работы и получить за них деньги после расторжения
+
+Кому полезно: руководителям строительных, проектных и изыскательских организаций, ГИП, договорникам и юристам.
+
+8 октября, 17:00 Мск. Онлайн, бесплатно. 30 минут практики и ответы на вопросы.
+
+Каждому участнику — чек-лист «[название чек-листа с лендинга]».
+
+Регистрация по ссылке
+https://urreshenie.ru/[slug]-webinar-08-10-2026?utm_source=telegram&utm_medium=social&utm_campaign=webinar_[slug]_08102026&utm_content=post</pre></div>
+<div class="box warn"><b>Заполнить перед публикацией</b>Вместо <span class="ph">[название чек-листа с лендинга]</span> и <span class="ph">[slug]</span> подставьте значения с готового лендинга. Ссылка для поста — лендинг с UTM, а не прямая на MTS Link. Реакции под пост: 🔥 👀</div>
+
+<h3>Совет, вторник 06.10</h3>
+<p>Тема под вебинар недели и его сегмент аудитории. Текст пишет SMM по краткой формулировке, которую Эдуард присылает до понедельника 05.10; в таблице советов лежит около 42 готовых, из которых можно заранее выбрать тезис, подходящий к вебинару 08.10 и его сегменту (строители, проектировщики, изыскатели). Структура карточки двухуровневая:</p>
+<ol id="p-advice">
+<li>Верхний уровень: короткий тезис совета, тот же, что в заголовке поста.</li>
+<li>Нижний уровень: развёрнутая часть, пояснение и практический шаг.</li>
+</ol>
+<p>Пост: заголовок совпадает с заголовком на карточке, дальше текст совета без переформулировок, в конце реакции 🔥 👀.</p>
+
+<h3>Опрос, среда 07.10</h3>
+<p>Тема широкая, по общей практике ИЮР, а не под тему недели, по требованию Эдуарда.</p>
+<div class="post" id="p-poll2"><div class="ph2"><span>Опрос · Telegram</span><button class="btn s" data-copy="c-poll2">Скопировать</button></div>
+<pre id="c-poll2">Чем чаще всего заканчиваются ваши споры с заказчиком?
+
+• Договариваемся до суда
+• Доходит до суда
+• Уступаем и не спорим
+• Споров не бывает</pre></div>
+<p class="pt">Реакции под пост: 🔥</p>
+
+<h3>Напоминание, четверг 08.10</h3>
+<p>Выходит утром вместе с карточкой чек-листа.</p>
+<div class="post" id="p-rem2"><div class="ph2"><span>Напоминание · вебинар 08.10 · все площадки</span><button class="btn s" data-copy="c-rem2">Скопировать</button></div>
+<pre id="c-rem2">Сегодня в 17:00 — вебинар «Как исполнителю расторгнуть проблемный договор и получить деньги за выполненные работы»
+
+Разберём, когда исполнитель вправе расторгнуть договор, как оформить расторжение и подтвердить выполненные работы, чтобы получить за них оплату.
+
+Участники получат чек-лист «[название чек-листа с лендинга]».
+
+Успеваете присоединиться — регистрация по ссылке
+https://urreshenie.ru/[slug]-webinar-08-10-2026?utm_source=telegram&utm_medium=social&utm_campaign=webinar_[slug]_08102026&utm_content=post</pre></div>
+<p class="pt">Реакции под напоминание: 🔥. Ссылка: лендинг с UTM, как в анонсе.</p>
+
+<h3>Запись вебинара, пятница 09.10</h3>
+<p>Выгрузка на YouTube выполняется днём, ссылка и текст чек-листа идут на остальные площадки. Обложку и элементы стиля в видео добавляют до публикации.</p>
+<div class="post" id="p-rec2"><div class="ph2"><span>Запись · вебинар 08.10 · все площадки</span><button class="btn s" data-copy="c-rec2">Скопировать</button></div>
+<pre id="c-rec2">Как исполнителю расторгнуть проблемный договор и получить деньги за выполненные работы: запись вебинара
+
+Выложили запись вебинара от 8 октября.
+
+Главное, что разобрали: [одна главная мысль вебинара — взять у Эдуарда или из записи].
+
+Если ваш заказчик тянет с оплатой или меняет условия, посмотрите запись до того, как направлять ему уведомление о расторжении.
+
+Смотреть запись
+[ссылка на запись]</pre></div>
+<div class="box info"><b>Мостик на следующий вебинар</b>15.10, изыскатели, объём изысканий: в конце поста ссылка на один тематический пост канала, близкий к теме изысканий. Пост подбирается заранее, до публикации записи. Реакции под пост: 🔥 👀</div>
+
+<h3>Видео и рилсы недели</h3>
+<p>На вебинарную неделю запланировано два ролика сверх дневного ритма, в пределах потолка 15 роликов в месяц.</p>
+<ul>
+<li><b>Серьёзный ролик</b> с крючком про риск денег: например, «Заказчик расторг договор, а выполненные работы не оплатил. Что делать исполнителю». Нарезка из съёмок вебинара или отдельная короткая запись Эдуарда. Выход по готовности, лучше во вторник или четверг.</li>
+<li><b>Юмористический скетч</b> про типичную ситуацию с расторжением договора. Сценарий пишет SMM, референсы и логистику съёмки организует продюсер Наталья. Выход ближе к концу недели.</li>
+</ul>
+
+<h3>Следующие три недели октября</h3>
+<p>Вторник чередуется: 29.09 вышел кейс, поэтому 06.10 совет, 13.10 кейс, 20.10 совет, 27.10 кейс. Остальные дни идут по тому же ритму, что и 5–9 октября.</p>
+<div class="tw"><table>
+<tr><th>Неделя</th><th>Вебинар (четверг, 17:00)</th><th>Аудитория</th><th>Вторник</th><th>Среда (опрос)</th></tr>
+<tr><td>12–16.10</td><td>15.10: недостаточный объём изысканий, кто отвечает за дополнительные работы и повторные изыскания</td><td>Изыскатели</td><td>Кейс</td><td>Как вы фиксируете договорённости с заказчиком?</td></tr>
+<tr><td>19–23.10</td><td>22.10: проект прошёл экспертизу, ошибки нашли на стройке</td><td>Проектировщики</td><td>Совет</td><td>Как часто заказчик задерживает оплату?</td></tr>
+<tr><td>26–30.10</td><td>29.10: 44-ФЗ и 223-ФЗ, изменение цены, объёма и сроков работ</td><td>Строители, проектировщики, изыскатели</td><td>Кейс</td><td>Кто в вашей компании отвечает за договоры с заказчиками?</td></tr>
+</table></div>
+<p>Опросы держатся широкими, в рамках общей практики по строительным спорам, как решил Эдуард.</p>
+</section>
+
+<!-- ===================== ЧАСТЬ 5. ИНСТРУМЕНТЫ ===================== -->
+
+<section class="sec" id="utm" data-part="Инструменты">
+<span class="tag">Инструменты</span>
+<h2>Генератор UTM-ссылки</h2>
+<p class="lead">Собирает ссылку на лендинг вебинара по нашему шаблону. Голая ссылка без меток не публикуется.</p>
+<div class="row2">
+<div><label>Адрес лендинга (slug, без даты)</label><input type="text" id="slug" placeholder="tz-ishodnye-dannye"></div>
+<div><label>Дата вебинара (дд-мм-гггг)</label><input type="text" id="wd" placeholder="01-10-2026"></div>
+<div><label>Тема кампании (короткое слово)</label><input type="text" id="camp" placeholder="tz"></div>
+<div><label>Площадка (utm_source)</label><select id="src"><option>telegram</option><option>vk</option><option>youtube</option><option>instagram</option><option>rutube</option></select></div>
+</div>
+<div class="quick"><button class="btn s" id="utmFill">Подставить вебинар 01.10</button><button class="btn s" id="utmFill2">Подставить вебинар 08.10</button></div>
+<pre id="utmOut">Заполните поля выше</pre>
+<button class="btn p" data-copy="utmOut">Скопировать ссылку</button>
+<p class="pt">Шаблон: <code>urreshenie.ru/&lt;тема&gt;-webinar-&lt;дд-мм-гггг&gt;?utm_source=telegram&amp;utm_medium=social&amp;utm_campaign=webinar_&lt;тема&gt;_&lt;ддммгггг&gt;&amp;utm_content=post</code>. Для вебинара 08.10 slug подставляется из адреса готового лендинга.</p>
+</section>
+
+<section class="sec" id="report" data-part="Инструменты">
+<span class="tag">Инструменты</span>
+<h2>Еженедельный отчёт: заготовка</h2>
+<p class="lead">Отправляется каждый понедельник в 10:00, собирается вручную: Яндекс.Метрика, соцсети, выводы. Посевы в отчёт не входят, их ведёт посевщик.</p>
+<div class="row2">
+<div>
+<label>Неделя (даты)</label><input type="text" id="rWeek" placeholder="28.09–04.10">
+<div class="row2"><div><label>Опубликовано</label><input type="number" id="rDone" placeholder="6"></div><div><label>Запланировано</label><input type="number" id="rPlan" placeholder="6"></div></div>
+<label>Метрика: визиты на лендинги вебинаров (эта неделя / прошлая)</label><input type="text" id="rVis" placeholder="120 / 95">
+</div>
+<div>
+<label>Соцсети: охваты, вовлечённость, подписчики</label><input type="text" id="rSoc" placeholder="охват 4,2 тыс., ER 3,1%, +18">
+<label>Что сработало</label><input type="text" id="rWin" placeholder="Кейс во вторник, кружок в понедельник">
+<label>Выводы</label><input type="text" id="rConc">
+</div>
+</div>
+<pre id="rOut"></pre>
+<button class="btn p" data-copy="rOut">Скопировать отчёт</button>
+</section>
+
+<section class="sec" id="contract" data-part="Договор и дальше">
+<span class="tag">Договор</span>
+<h2>Образец договора с SMM-специалистом</h2>
+<p>Возмездное оказание услуг (глава 39 ГК РФ), самозанятый, 40 000 ₽ в месяц. Жёлтым выделено то, что нужно заполнить. Перед подписанием договор стоит показать юристу компании.</p>
+<details open><summary>Как заполнять образец</summary><div>
+<p>Это заготовка договора возмездного оказания услуг (глава 39 ГК РФ) с самозанятым: 40 000 ₽ в месяц, удалённо, без привязки к графику.</p>
+<ul>
+<li>Всё в <mark>[квадратных скобках]</mark> нужно заменить данными или выбрать вариант.</li>
+<li>Пояснения курсивом с пометкой «Подсказка» после заполнения удалите.</li>
+<li>Данные Исполнителя (ФИО, ИНН, банк, счёт или телефон для СБП) вписываются в разделе 10.</li>
+<li>Перед подписанием договор стоит показать юристу компании: образец не заменяет юридическую проверку.</li>
+</ul>
+</div></details>
+<details><summary>Договор возмездного оказания услуг № [номер]</summary><div>
+<p>г. <mark>[город]</mark>  ·  <mark>[дата заключения]</mark></p>
+<p>&amp;#91;Полное наименование Заказчика, например: Общество с ограниченной ответственностью «Интеллектуальные юридические решения»], далее «Заказчик», в лице <mark>[должность, ФИО]</mark>, действующего на основании <mark>[Устава / доверенности № … от …]</mark>, с одной стороны, и</p>
+<p>гражданин(ка) Российской Федерации <mark>[ФИО Исполнителя полностью]</mark>, применяющий(ая) специальный налоговый режим «Налог на профессиональный доход» (самозанятый), ИНН <mark>[ИНН Исполнителя]</mark>, далее «Исполнитель», с другой стороны, совместно «Стороны», заключили настоящий договор о нижеследующем.</p>
+<p><i class="hint">Подсказка: название Заказчика сверьте с уставом и с предыдущими договорами компании. Подписывать за Заказчика может руководитель по уставу или сотрудник по доверенности.</i></p>
+</div></details>
+<details><summary>1. Предмет договора</summary><div>
+<p>1.1. Исполнитель обязуется по заданию Заказчика оказать услуги по ведению социальных сетей и каналов Заказчика (SMM) в объёме, указанном в разделе 2 и Приложении № 1, а Заказчик обязуется принять и оплатить эти услуги.</p>
+<p>1.2. Услуги оказываются на площадках Заказчика: Telegram-канал @urfundament, YouTube, Instagram, VK, Rutube, а также <mark>[второй SMM-канал: указать площадку, если он запущен; иначе удалить]</mark>. Управление сайтом urreshenie.ru, рекламой и посевами в предмет договора не входит.</p>
+<p>1.3. Исполнитель оказывает услуги лично. <mark>[Привлечение третьих лиц возможно только с письменного согласия Заказчика.]</mark></p>
+<p>1.4. Услуги оказываются удалённо. Исполнитель самостоятельно определяет способ, время и место оказания услуг. Заказчик не устанавливает Исполнителю рабочий график и не предоставляет рабочее место.</p>
+<p>1.5. Договор является гражданско-правовым и не создаёт трудовых отношений. Правила внутреннего трудового распорядка Заказчика на Исполнителя не распространяются.</p>
+</div></details>
+<details><summary>2. Права и обязанности сторон</summary><div>
+<p>2.1. Исполнитель обязан:</p>
+<ol>
+<li>Вести каналы Заказчика по контент-плану на неделю по принципу «один материал в день, один и тот же на всех площадках, без вариантов под каждую сеть».</li>
+<li>Писать тексты советов и кейсов и оформлять их в карточки и посты. Материалом служат дела и краткие формулировки советов, которыми делится Заказчик; Исполнитель разбирает их и пишет текст. Факты, суммы, сроки, номера дел и итоги проверять по первоисточнику (судебному акту), а не по заголовку.</li>
+<li>Создавать карточки и баннеры в Figma по брендгайду и шаблонам Заказчика.</li>
+<li>Публиковать материалы (кросспостинг) в Telegram, YouTube, Instagram, VK и Rutube в сроки, указанные в контент-плане.</li>
+<li>Готовить и публиковать анонсы, напоминания, карточки чек-листов и записи вебинаров Заказчика (вебинары проходят по четвергам в 17:00 по Москве, запись публикуется в пятницу). Ссылки на регистрацию давать только на лендинг вебинара с UTM-метками.</li>
+<li>Публиковать опросы, формулируя их широко, в рамках общей практики Заказчика по строительным спорам.</li>
+<li>Публиковать видеокружки, Reels и Shorts в пределах лимита 15 роликов в месяц во всех сетях; добавлять к записям вебинаров обложку и элементы фирменного стиля. Съёмку и монтаж выполняют продюсер и монтажёр Заказчика.</li>
+<li>Самостоятельно писать текстовую основу сценариев роликов (идея, посыл, текст); референсы и организацию съёмки обеспечивает продюсер Заказчика.</li>
+<li>Отвечать на комментарии и сообщения аудитории в течение рабочего дня. Юридических рекомендаций по существу дел в комментариях не давать: человека ведут на консультацию или призыв к действию вебинара. Негатив и спам передавать Заказчику, не вступая в спор в открытой ветке.</li>
+<li>Собирать вопросы аудитории (комментарии, чат вебинара, личные сообщения) как идеи для опросов, советов и тем вебинаров.</li>
+<li>Анализировать контент, метрики (охваты, вовлечённость, переходы по ссылкам) и каналы конкурентов; предлагать гипотезы и решения, а не только исполнять поручения буквально.</li>
+<li>Ежедневно синхронизировать публикации с командой Заказчика (продюсер, монтажёр, контекстолог, посевщик).</li>
+<li>&amp;#91;Вести второй SMM-канал Заказчика в объёме 2–3 постов в неделю. Пункт оставить, если канал запущен; иначе удалить.]</li>
+<li>Участвовать в контент-стратегии: предлагать темы, форматы и механики вовлечения (опросы, интерактивы).</li>
+<li>Каждую неделю направлять Заказчику отчёт в порядке раздела 3.</li>
+<li>Соблюдать стандарты оформления и качества из Приложения № 1.</li>
+</ol>
+<p>2.2. Исполнитель вправе запрашивать у Заказчика материалы и разъяснения, необходимые для оказания услуг, в том числе новые дела и формулировки советов для пополнения банка контента.</p>
+<p>2.3. Заказчик обязан:</p>
+<ol>
+<li>Предоставить Исполнителю доступы к площадкам, брендгайд, шаблоны, банк советов и кейсов, фото и видео, необходимые для оказания услуг.</li>
+<li>Передавать краткие формулировки советов и материалы по делам в сроки, согласованные Сторонами.</li>
+<li>Рассматривать и утверждать контент-план и посты в порядке раздела 3.</li>
+<li>Оплачивать услуги в порядке и в сроки, установленные разделом 4.</li>
+</ol>
+<p>2.4. Заказчик вправе контролировать ход и качество услуг, не вмешиваясь в оперативную деятельность Исполнителя, и требовать устранения недостатков.</p>
+<p><i class="hint">Подсказка: перечень в п. 2.1 собран из регламента SMM. Дополнительные пожелания по работе можно вписать в Приложение № 1.</i></p>
+</div></details>
+<details><summary>3. Порядок взаимодействия и приёмки услуг</summary><div>
+<p>3.1. Контент-план на неделю Исполнитель готовит заранее и представляет на еженедельной планёрке в понедельник. Время планёрки плавающее, согласуется Сторонами заранее; формат: <mark>[онлайн-созвон / чат]</mark>.</p>
+<p>3.2. Жёсткой привязки к рабочим часам нет. В течение дня Исполнитель остаётся на связи в <mark>[Telegram / рабочем чате]</mark> и отвечает на рабочие вопросы Заказчика в разумный срок, не позднее <mark>[4 часов]</mark> в рабочие дни.</p>
+<p>3.3. Каждый пост перед публикацией утверждает <mark>[ФИО и должность представителя Заказчика, например руководитель отдела маркетинга Дмитрий]</mark>. Тексты советов и кейсов и карточки Исполнитель готовит минимум за день до публикации, чтобы осталось время на согласование. Если согласование не получено, материал <mark>[не публикуется до получения согласования / публикуется по плану, если ответа нет в течение …]</mark>.</p>
+<p>3.4. Заказчик присылает краткие формулировки советов и материалы по делам заранее, <mark>[до понедельника перед неделей публикации]</mark>, Исполнитель вправе запросить дополнительные материалы для пополнения банка.</p>
+<p>3.5. Каждый понедельник до 10:00 Исполнитель направляет Заказчику отчёт за прошедшую неделю. Отчёт составляется вручную и включает данные Яндекс.Метрики (переходы на лендинги вебинаров по каналам и целям, сравнение с прошлой неделей), данные по соцсетям (охваты, вовлечённость, что сработало, какие рубрики и форматы ведут трафик) и выводы. Отдельно фиксируется выполнение плана публикаций. Регистрации и переходы с посевов ведёт посевщик Заказчика, в этот отчёт они не входят.</p>
+<p>3.6. Отчётный период по договору равен календарному месяцу. Не позднее <mark>[3]</mark> рабочих дней после его окончания Исполнитель направляет Заказчику акт оказанных услуг (Приложение № 2). Заказчик в течение <mark>[3]</mark> рабочих дней подписывает акт или направляет мотивированные возражения. Если возражения не поступили, услуги считаются принятыми.</p>
+<p>3.6.1. Если услуги оказаны ненадлежащим образом, Исполнитель по требованию Заказчика устраняет недостатки в разумный срок без дополнительной оплаты.</p>
+</div></details>
+<details><summary>4. Стоимость и порядок оплаты</summary><div>
+<p>4.1. Стоимость услуг Исполнителя составляет 40 000 (сорок тысяч) рублей за один календарный месяц оказания услуг. Стоимость включает всё вознаграждение Исполнителя за услуги, перечисленные в Приложении 1, независимо от количества подготовленных материалов в пределах согласованных ориентиров.</p>
+<p>4.2. Исполнитель применяет специальный налоговый режим «Налог на профессиональный доход» (Федеральный закон от 27.11.2018 № 422-ФЗ). НДС не облагается. Заказчик не является налоговым агентом Исполнителя и не удерживает и не уплачивает за него налоги и страховые взносы.</p>
+<p>4.3. Оплата производится по итогам каждого месяца оказания услуг в течение <mark>[5]</mark> рабочих дней после подписания сторонами акта оказанных услуг (Приложение 2).</p>
+<p><i class="hint">Подсказка: вместо этого пункта можно выбрать вариант с авансом: «50% стоимости за месяц — не позднее <mark>[5]</mark> числа текущего месяца, остаток — в течение <mark>[5]</mark> рабочих дней после подписания акта». Для первого месяца с испытательным сроком удобнее оплата по итогам.</i></p>
+<p>4.4. Если услуги оказаны не за полный календарный месяц (начало или окончание работы в середине месяца), стоимость определяется пропорционально количеству календарных дней оказания услуг в этом месяце.</p>
+<p>4.5. Оплата производится переводом на <mark>[банковский счёт / банковскую карту / по номеру телефона через СБП]</mark> Исполнителя, указанный в разделе 10 настоящего договора. Комиссии банка за перевод несёт Заказчик.</p>
+<p><i class="hint">Подсказка: уточните у исполнителя, куда ему удобно получать деньги, и впишите только один способ. Данные карты и счёта не пересылайте в открытых чатах — вносите их сразу в подписываемый экземпляр.</i></p>
+<p>4.6. Не позднее <mark>[следующего дня после получения оплаты — при желании, срок можно сделать 1–3 дня]</mark> Исполнитель формирует в приложении «Мой налог» чек и передаёт Заказчику ссылку на него или его копию (ст. 14 Федерального закона № 422-ФЗ). Без чека обязательства Заказчика по оплате считаются неисполненными в части, неоплаченной без чека, до его предоставления.</p>
+<p>4.7. Расходы Исполнителя (программы, сервисы для подготовки материалов, связь, оборудование) входят в стоимость услуг и отдельно не возмещаются. Расходы, которые Заказчик заранее согласовал письменно (в том числе в мессенджере), возмещаются на основании подтверждающих документов.</p>
+<p>4.8. Изменение стоимости услуг оформляется дополнительным соглашением сторон.</p>
+</div></details>
+<details><summary>5. Права на результаты услуг</summary><div>
+<p>5.1. Результатами услуг являются тексты, сценарии, визуальные материалы, подборки, отчёты и иные материалы, созданные Исполнителем для Заказчика в рамках настоящего договора (далее — «Материалы»).</p>
+<p>5.2. Исполнитель гарантирует, что Материалы созданы им лично, не нарушают права третьих лиц, и что он вправе передавать права на них. Использование чужих изображений, шрифтов, музыки и текстов допускается только на законном основании (лицензия, свободная лицензия, собственные права Заказчика).</p>
+<p>5.3. С момента подписания акта оказанных услуг за соответствующий месяц Исполнитель передаёт Заказчику исключительное право на Материалы, созданные в этот месяц, в полном объёме, для использования любыми способами на территории всего мира на весь срок действия исключительного права (ст. 1229, 1270, 1288 ГК РФ), включая право на переработку, доработку и публикацию без указания имени автора. Вознаграждение за передачу исключительного права включено в стоимость услуг, указанную в п. 4.1.</p>
+<p>5.4. Заказчик вправе передавать права на Материалы третьим лицам, в том числе аффилированным с ним, и не обязан использовать Материалы.</p>
+<p>5.5. Исполнитель вправе демонстрировать выполненную работу в личном портфолио в виде скриншотов, если это не раскрывает конфиденциальную информацию Заказчика и Заказчик не возражает письменно.</p>
+<p>5.6. Права на аккаунты, каналы, сообщества, подписчиков, базы контактов и иные каналы связи с аудиторией принадлежат Заказчику. Исполнитель не вправе создавать от имени Заказчика новые аккаунты и каналы, не согласовав это письменно.</p>
+<p><i class="hint">Подсказка: если у исполнителя есть готовые собственные шаблоны, которые он будет использовать в работе, их права остаются у него, а Заказчик получает простую (неисключительную) лицензию. Этот случай добавляется отдельным пунктом, если возникнет.</i></p>
+</div></details>
+<details><summary>6. Конфиденциальность, персональные данные и доступы к аккаунтам</summary><div>
+<p>6.1. Конфиденциальной признаётся любая информация, полученная Исполнителем от Заказчика или в связи с исполнением договора и не являющаяся общедоступной: данные о клиентах и обращениях, аналитика и статистика сайта и соцсетей, внутренние документы и процессы, планы, рекламные и финансовые показатели, дела и кейсы до их публикации, а также логины, пароли и иные доступы.</p>
+<p>6.2. Исполнитель обязуется не раскрывать конфиденциальную информацию третьим лицам, не использовать её в своих интересах и интересах других лиц и обеспечивать её сохранность. Обязательство действует в течение срока договора и <mark>[3]</mark> лет после его окончания.</p>
+<p>6.3. Информация о делах и клиентах Заказчика публикуется только в обезличенном виде и только после согласования с Заказчиком. Исполнитель не публикует данные, позволяющие идентифицировать клиента (ФИО, контакты, номера дел, фото), без письменного согласия Заказчика.</p>
+<p>6.4. Доступы к аккаунтам, сервисам и системам передаются Исполнителю только на срок оказания услуг и только в объёме, необходимом для работы. Исполнитель:</p>
+<ul>
+<li>хранит логины и пароли в защищённом виде и не передаёт их третьим лицам;</li>
+<li>не меняет пароли, способы входа и права администраторов без согласования с Заказчиком;</li>
+<li>не подключает к аккаунтам сторонние сервисы и не даёт им доступ без согласования;</li>
+<li>при подозрении на утечку или взлом немедленно сообщает Заказчику.</li>
+</ul>
+<p>6.5. При завершении договора Исполнитель в течение <mark>[2]</mark> рабочих дней возвращает все материалы и рабочие файлы, прекращает использование доступов, удаляет их из своих устройств и заметок, а Заказчик вправе сменить пароли.</p>
+<p>6.6. Персональные данные, которые стороны получают друг от друга, обрабатываются в целях исполнения договора в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных». Если при оказании услуг Исполнитель получает доступ к персональным данным подписчиков, клиентов или лидов, он использует их только для оказания услуг и не копирует в личные хранилища.</p>
+<p>6.7. Исполнитель отвечает за нарушение конфиденциальности в порядке, предусмотренном разделом 7 договора и законодательством.</p>
+</div></details>
+<details><summary>7. Ответственность сторон и статус Исполнителя</summary><div>
+<p>7.1. За неисполнение или ненадлежащее исполнение обязательств стороны несут ответственность в соответствии с законодательством Российской Федерации.</p>
+<p>7.2. Ответственность Исполнителя ограничивается реальным ущербом, причинённым по его вине, и не может превышать <mark>[размер стоимости услуг за один месяц — 40 000 рублей]</mark>, за исключением случаев умышленного нарушения, разглашения конфиденциальной информации и нарушения прав на Материалы.</p>
+<p>7.3. При просрочке оплаты по вине Заказчика Исполнитель вправе требовать неустойку <mark>[0,1%]</mark> от неоплаченной суммы за каждый день просрочки, но не более <mark>[10%]</mark> от неоплаченной суммы.</p>
+<p>7.4. Исполнитель не несёт ответственность за изменения алгоритмов, блокировки и ограничения платформ (Telegram, VK, YouTube, Rutube, Дзен и др.), не связанные с его действиями, за результаты рекламных и органических охватов, за количество подписчиков и заявок. Стороны понимают, что показатели зависят от факторов, не подконтрольных Исполнителю. Услуги считаются оказанными надлежащим образом при добросовестном исполнении Приложения 1, а не при достижении конкретных цифр.</p>
+<p>7.5. Исполнитель подтверждает, что является плательщиком налога на профессиональный доход и обязуется сообщить Заказчику в течение <mark>[1]</mark> рабочего дня, если утратит этот статус. Если Исполнитель утратил статус самозанятого, Заказчик вправе приостановить оплату до его восстановления, либо расторгнуть договор в одностороннем порядке. Если Исполнитель не выдал чек и это повлекло налоговые последствия для Заказчика, Исполнитель возмещает Заказчику возникшие убытки.</p>
+<p>7.6. Стороны подтверждают, что настоящий договор является гражданско-правовым и не создаёт трудовых отношений. Исполнитель самостоятельно организует свою деятельность, самостоятельно определяет время и место работы, применяет собственные методы и оборудование, не подчиняется правилам внутреннего трудового распорядка Заказчика, не включается в штат, не получает отпуск, больничные и иные гарантии, предусмотренные трудовым законодательством. Исполнитель вправе оказывать услуги другим лицам при условии соблюдения раздела 6.</p>
+<p>7.7. Заказчик не обязан предоставлять Исполнителю рабочее место, технику и программы, за исключением доступов к аккаунтам, необходимых для оказания услуг.</p>
+</div></details>
+<details><summary>8. Срок договора, пробный период, расторжение</summary><div>
+<p>8.1. Договор вступает в силу с <mark>[дата]</mark> и действует до <mark>[дата]</mark> / до 31 декабря 2026 года, а если ни одна из сторон не заявит о прекращении — считается продлённым на каждый следующий <mark>[календарный месяц / срок]</mark>. Обязательства по оплате действуют до полного расчёта.</p>
+<p><i class="hint">Подсказка: удобнее всего указать срок «до конца ближайшего квартала» с автопродлением — тогда не нужно каждый раз подписывать новый договор.</i></p>
+<p>8.2. Первые <mark>[30]</mark> календарных дней — пробный период. В этот срок любая сторона вправе отказаться от договора, уведомив другую сторону письменно (в том числе сообщением в мессенджере или на электронную почту) не менее чем за <mark>[3]</mark> календарных дня. Оплачиваются услуги, фактически оказанные до дня прекращения договора.</p>
+<p>8.3. После пробного периода Исполнитель вправе отказаться от договора, уведомив Заказчика за <mark>[14]</mark> календарных дней, а Заказчик — за <mark>[14]</mark> календарных дней, при условии оплаты фактически понесённых Исполнителем расходов и фактически оказанных услуг (ст. 782 ГК РФ).</p>
+<p>8.4. Заказчик вправе расторгнуть договор досрочно и в одностороннем порядке без соблюдения срока из п. 8.3, если Исполнитель существенно нарушил договор: разглашение конфиденциальной информации, использование доступов не по назначению, публикация материалов без согласования, повторное (более <mark>[двух]</mark> раз подряд) нарушение сроков по вине Исполнителя.</p>
+<p>8.5. При прекращении договора Исполнитель в течение <mark>[2]</mark> рабочих дней возвращает доступы и материалы по п. 6.5 и передаёт Заказчику все рабочие наработки: контент-план, черновики, шаблоны, отчёты, список задач в работе.</p>
+<p>8.6. Стороны подписывают итоговый акт за последний отчётный период, и расчёт производится в порядке раздела 4.</p>
+</div></details>
+<details><summary>9. Разрешение споров и прочие условия</summary><div>
+<p>9.1. Все споры стороны стремятся решить путём переговоров. Претензия направляется письменно (в том числе на электронную почту, указанную в разделе 10); срок ответа на претензию — <mark>[10]</mark> рабочих дней с момента получения.</p>
+<p>9.2. Если спор не удалось урегулировать, он передаётся на рассмотрение в <mark>[суд по месту нахождения Заказчика: наименование суда, город]</mark>, в соответствии с компетенцией судов общей юрисдикции или арбитражного суда.</p>
+<p><i class="hint">Подсказка: раз Исполнитель — физлицо (самозанятый), спор с ним рассматривает суд общей юрисдикции (мировой или районный). Договорная подсудность по месту Заказчика допустима, поэтому впишите свой город.</i></p>
+<p>9.3. Стороны признают юридическую силу документов и сообщений, направленных по электронной почте и в мессенджерах, по реквизитам раздела 10. Договор, акты, дополнительные соглашения и другие документы могут подписываться простой электронной подписью или обмениваться в виде скан-копий, с последующим обменом оригиналами по запросу любой стороны.</p>
+<p>9.4. Все изменения и дополнения к договору действительны, если совершены в письменной форме и подписаны обеими сторонами. Приложения являются неотъемлемой частью договора.</p>
+<p>9.5. Стороны обязуются уведомлять друг друга об изменении реквизитов, номера телефона и электронной почты в течение <mark>[3]</mark> рабочих дней. Сообщение, направленное по последним известным реквизитам, считается полученным.</p>
+<p>9.6. Ни одна из сторон не вправе передавать свои права и обязанности по договору третьим лицам без письменного согласия другой стороны.</p>
+<p>9.7. Стороны освобождаются от ответственности за неисполнение обязательств, если оно вызвано обстоятельствами непреодолимой силы (ст. 401 ГК РФ), при условии уведомления другой стороны в разумный срок.</p>
+<p>9.8. Договор составлен в двух экземплярах, имеющих одинаковую юридическую силу, по одному для каждой из сторон / подписан в электронной форме.</p>
+<p>9.9. Подписывая договор, Исполнитель подтверждает, что ознакомился с Приложением 1, понимает содержание услуг и не имеет ограничений, препятствующих их оказанию.</p>
+</div></details>
+<details><summary>10. Реквизиты и подписи сторон</summary><div>
+<p><b>Заказчик</b></p>
+<ul>
+<li>Полное наименование: <mark>[например, ООО «Интеллектуальные юридические решения»]</mark></li>
+<li>ИНН / КПП: <mark>[ ]</mark></li>
+<li>ОГРН: <mark>[ ]</mark></li>
+<li>Адрес: <mark>[юридический адрес]</mark></li>
+<li>Расчётный счёт: <mark>[ ]</mark></li>
+<li>Банк: <mark>[название банка]</mark>, БИК: <mark>[ ]</mark>, корр. счёт: <mark>[ ]</mark></li>
+<li>Электронная почта для документов: <mark>[ ]</mark></li>
+<li>Телефон / мессенджер для рабочей связи: <mark>[ ]</mark></li>
+<li>Подписант: <mark>[должность, ФИО]</mark>, действует на основании <mark>[Устава / доверенности]</mark></li>
+</ul>
+<p><b>Исполнитель</b></p>
+<ul>
+<li>ФИО полностью: <mark>[Фамилия Имя Отчество]</mark></li>
+<li>Статус: самозанятый (плательщик налога на профессиональный доход)</li>
+<li>ИНН: <mark>[12 цифр]</mark></li>
+<li>Паспорт: серия <mark>[ ]</mark> номер <mark>[ ]</mark>, выдан <mark>[кем, когда]</mark>, код подразделения <mark>[ ]</mark></li>
+<li>Адрес регистрации: <mark>[ ]</mark></li>
+<li>Электронная почта: <mark>[ ]</mark></li>
+<li>Телефон / мессенджер (Telegram): <mark>[ ]</mark></li>
+<li>Способ получения оплаты (выберите один): <mark>[банковский счёт: номер счёта, БИК, банк / банковская карта: номер карты / СБП: номер телефона и банк]</mark></li>
+</ul>
+<p><i class="hint">Подсказка: у самозанятого нет ОГРНИП, есть только ИНН и статус в приложении «Мой налог». Паспортные данные нужны для заключения договора и налогового учёта — вносите их только в подписываемый экземпляр и не пересылайте в открытых чатах. Если Исполнитель хочет получать деньги на карту без указания счёта, достаточно номера карты (или номера телефона для СБП) — банк указывать всё равно нужно.</i></p>
+<p><b>Подписи сторон</b></p>
+<p>Заказчик: \_\_\_\_\_\_\_\_\_\_\_\_ / <mark>[ФИО]</mark> /   М.П. (при наличии печати)</p>
+<p>Исполнитель: \_\_\_\_\_\_\_\_\_\_\_\_ / <mark>[ФИО]</mark> /</p>
+</div></details>
+<details><summary>Приложение 1. Перечень услуг, ожидания и ориентиры по качеству</summary><div>
+<p>к договору возмездного оказания услуг № <mark>[номер]</mark> от <mark>[дата]</mark></p>
+<p><b>1. Перечень услуг (SMM и ведение социальных сетей)</b></p>
+<ol>
+<li>Разработка и ведение контент-плана на месяц по всем каналам Заказчика (Telegram-канал, VK, Дзен, YouTube, Rutube, Instagram и др. — <mark>[уточнить список]</mark>) и его согласование с Заказчиком.</li>
+<li>Написание текстов публикаций: советы, кейсы, опросы, анонсы, напоминания, посты по итогам мероприятий и вебинаров. Оформление экспертных материалов и коротких формулировок, которые передаёт Заказчик, в готовые посты.</li>
+<li>Подготовка сценариев для видеокружков и коротких видео (не более <mark>[15]</mark> материалов в месяц), сценарии для записи; текстовое сопровождение и подписи к видео.</li>
+<li>Оформление визуальных материалов (карточки, обложки, подборки) по шаблонам и брендгайду Заказчика.</li>
+<li>Публикация одобренных материалов на площадках Заказчика в согласованные дни и время, кросспостинг одного материала по всем каналам, размещение ссылок с UTM-метками по установленному образцу.</li>
+<li>Подготовка анонсов и напоминаний о вебинарах и других мероприятиях (регистрация, напоминание в день мероприятия, публикация записи).</li>
+<li>Подготовка опросов, чек-листов и других материалов, которые помогают подписчикам и потенциальным клиентам на пути к заявке.</li>
+<li>Мониторинг комментариев и сообщений в каналах, подготовка ответов и передача обращений, требующих участия юристов, ответственным лицам Заказчика.</li>
+<li>Еженедельная отчётность: статистика каналов и сайта (Яндекс.Метрика, аналитика соцсетей), краткие выводы и предложения по корректировке плана.</li>
+<li>Соблюдение регламента ведения социальных сетей, чек-листа перед публикацией и правил использования чужих материалов.</li>
+</ol>
+<p><b>2. Что не входит в услуги</b></p>
+<ul>
+<li>Покупка рекламы, посевы, накрутка подписчиков и просмотров;</li>
+<li>переговоры с блогерами и площадками;</li>
+<li>профессиональная съёмка и монтаж видео (Исполнитель готовит сценарии и материалы для записи);</li>
+<li>юридические консультации клиентам и публикация ответов от имени юристов без согласования;</li>
+<li>иные работы — только после согласования и, при необходимости, отдельной оплаты (доп. соглашение).</li>
+</ul>
+<p><b>3. Пожелания Заказчика к организации работы</b></p>
+<p>Пожелания носят рекомендательный характер, не являются правилами трудового распорядка и не ограничивают право Исполнителя самостоятельно определять время и способ выполнения работы:</p>
+<ol>
+<li>Ориентир по ритму: один основной материал в день кросспостом по всем каналам, ориентировочно в будни. По стандарту рубрик: понедельник — анонс с видеокружком; вторник — совет или кейс (по чередованию); среда — опрос; четверг — напоминание и чек-лист; пятница — запись мероприятия.</li>
+<li>Исполнитель на связи в течение рабочего дня в разумных пределах и отвечает на рабочие вопросы Заказчика в течение рабочего дня; время ответа в случае занятости заранее согласуется.</li>
+<li>Материалы отправляются на согласование Заказчику заблаговременно — <mark>[не позднее чем за 1 рабочий день до публикации]</mark>; без одобрения материал не публикуется.</li>
+<li>Еженедельный отчёт направляется по понедельникам к <mark>[10:00]</mark> в согласованной форме.</li>
+<li>Еженедельная планёрка проводится по понедельникам в согласованное с обеих сторон время; формат — созвон или переписка.</li>
+<li>Стиль текстов: экспертный, понятный, без юридического «канцелярита», без излишних обещаний и гарантий результата, с соблюдением требований законодательства о рекламе и профессиональной этики.</li>
+<li>Числовые ориентиры (охваты, подписчики, заявки) фиксируются как цели и не являются гарантиями Исполнителя.</li>
+<li>Использовать только шаблоны и брендгайд Заказчика; при отсутствии материалов Исполнитель уточняет их у Заказчика заранее.</li>
+<li>При возникновении ошибок в публикациях, критике аудитории или репутационных рисках Исполнитель немедленно сообщает Заказчику.</li>
+</ol>
+</div></details>
+<details><summary>Приложение 2. Форма акта оказанных услуг</summary><div>
+<p><b>АКТ № <mark>[номер]</mark></b></p>
+<p>оказанных услуг по договору возмездного оказания услуг № <mark>[номер]</mark> от <mark>[дата]</mark></p>
+<p>г. <mark>[город]</mark>                                                                                     «<b>» \_\_\_\_\_\_\_\_\_\_ 20</b> г.</p>
+<p>&amp;#91;Полное наименование Заказчика], далее «Заказчик», в лице <mark>[должность, ФИО]</mark>, и <mark>[ФИО полностью]</mark>, самозанятый, ИНН <mark>[ ]</mark>, далее «Исполнитель», составили настоящий акт о нижеследующем:</p>
+<ol>
+<li>В период с <mark>[дата]</mark> по <mark>[дата]</mark> Исполнитель оказал Заказчику услуги, предусмотренные Приложением 1 к договору: ведение социальных сетей Заказчика (SMM) в объёме, указанном в договоре.</li>
+<li>Общая стоимость оказанных услуг составляет <mark>[40 000 (сорок тысяч)]</mark> рублей. НДС не облагается (Исполнитель применяет специальный налоговый режим «Налог на профессиональный доход»).</li>
+<li>Краткое описание выполненной работы: <mark>[например: подготовлено и опубликовано \_\_ материалов, подготовлено \_\_ сценариев, направлено \_\_ еженедельных отчётов]</mark>.</li>
+<li>Заказчик претензий по объёму, качеству и срокам оказания услуг не имеет / имеет следующие замечания: <mark>[ ]</mark>.</li>
+<li>Чек, сформированный в приложении «Мой налог», передаётся Заказчику в порядке, предусмотренном пунктом 4.6 договора: <mark>[ссылка на чек / номер чека]</mark>.</li>
+</ol>
+<p>Заказчик: \_\_\_\_\_\_\_\_\_\_\_\_ / <mark>[ФИО]</mark> /</p>
+<p>Исполнитель: \_\_\_\_\_\_\_\_\_\_\_\_ / <mark>[ФИО]</mark> /</p>
+<p><i class="hint">Подсказка: акт подписывается раз в месяц. Если акт сформирован до поступления оплаты, укажите в п. 5, что чек будет передан после получения оплаты.</i></p>
+</div></details>
+</section>
+
+<section class="sec" id="done" data-part="Договор и дальше">
+<span class="tag">Инструменты</span>
+<h2>Что делать дальше</h2>
+<ul>
+<li>Назначить созвон с Дмитрием и Эдуардом Каракозовым, разобрать вопросы.</li>
+<li>Получить доступы (раздел «Доступы и медиа»). Пароли передаются лично или через менеджер паролей.</li>
+<li>Уточнить у Дмитрия, где лежат брендгайд, палитра, шрифты, логотип и шаблоны карточек в Figma.</li>
+<li>Посмотреть <a href="#contract">образец договора</a>, сообщить Дмитрию данные для заполнения (ФИО, ИНН, способ получения оплаты).</li>
+</ul>
+</section>
+
+<a class="btn top" href="#top">↑ Наверх</a>
+</main></div>
+<div id="toast"></div>
+<script>(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function store(k,v){try{if(v===undefined){var x=localStorage.getItem('iur_'+k);return x?JSON.parse(x):null}localStorage.setItem('iur_'+k,JSON.stringify(v))}catch(e){return null}}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},1600)}
+
+/* ---------- данные ---------- */
+var DN=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+var DAYS={
+1:{n:'Понедельник',pub:'Видеокружок с анонсом вебинара',where:'Telegram (кружок); тот же файл как Shorts/Reels/клип в YouTube, Instagram, VK, Rutube',
+ who:'Екатерина записывает кружок, монтажёр делает из него рилс, публикует SMM',
+ prep:['Планёрка (плавающий слот, время согласуется заранее)','Контент-план недели утверждён','Ссылка на лендинг с UTM, текст поста, обложка','До 10:00 отправить еженедельный отчёт: Метрика + соцсети + выводы'],
+ note:'Анонс идёт подписью к видеокружку и дублируется на остальных площадках. Заголовок совпадает с заголовком на карточке. Каждый пост перед публикацией утверждает Дмитрий.'},
+2:{n:'Вторник',pub:'Совет или кейс (чередуются по неделям)',where:'Все площадки, одна и та же карточка и текст',
+ who:'Совет и кейс: текст пишет SMM. Эдуард делится делами и краткими формулировками советов, банк пополняется по запросу',
+ prep:['Карточка по таблице советов или кейсов','Совет: краткая формулировка от Эдуарда до понедельника, SMM пишет текст; карточка двухуровневая','Кейс: карточка из трёх блоков (претензия, расходы, финансовый результат); номер дела и итог сверить по постановлению суда','Отметить публикацию в таблице советов или кейсов'],
+ note:'29.09 вышел кейс, поэтому 06.10 совет, 13.10 кейс, 20.10 совет, 27.10 кейс.'},
+3:{n:'Среда',pub:'Опрос',where:'Telegram',
+ who:'SMM; формулировка широкая, по общей практике ИЮР (требование Эдуарда)',
+ prep:['Формулировка опроса в рамках общей практики по строительным спорам, 4 варианта ответа','Собрать вопросы из комментариев и чата для вебинара','Реакция под опросом: 🔥'],
+ note:'Опрос не привязывается жёстко к теме вебинара недели: так собирается общая реакция аудитории.'},
+4:{n:'Четверг',pub:'Напоминание о вебинаре и карточка с чек-листом',where:'Все площадки, утром; вебинар в 17:00 по Москве',
+ who:'SMM; вебинар проводит Эдуард или приглашённый спикер, регистрация через MTS Link',
+ prep:['Проверить лендинг и ссылку с UTM','Утреннее напоминание о вебинаре в 17:00','Карточка с чек-листом по теме вебинара','Реакция под напоминанием: 🔥'],
+ note:'После вебинара собрать вопросы из чата: пригодятся для опросов, советов и тем.'},
+5:{n:'Пятница',pub:'Запись вебинара',where:'YouTube; в остальных сетях ссылка и текст чек-листа',
+ who:'Монтажёр отдаёт запись, обложку и элементы стиля добавляет SMM',
+ prep:['Обложка и элементы фирменного стиля в записи (шаблоны есть)','Выгрузка на YouTube днём, ссылка и текст чек-листа на остальные площадки','Мостик на следующий вебинар: ссылка на один тематический пост канала','Запросить у Эдуарда приглашение на следующий вебинар в формате кружка (до пятницы)','Екатерина в пятницу говорит, что можно публиковать кружок','Реакции под постом: 🔥 👀'],
+ note:'Запись выходит в ту же неделю, на следующий день после вебинара.'}
+};
+var W=[
+{iso:'2026-09-23',d:'23.09',aud:'Руководители',t:'Закрытая стратегическая сессия для руководителей (ответственность гендиректора и учредителей)',st:'прошёл',info:'Генеральные директора, собственники и замы, до 15 участников, бесплатно, онлайн. С офлайн-мероприятий и подобных сессий по модели «тема недели» снимаются три единицы контента: до, во время и после (модель пока не утверждена).'},
+{iso:'2026-09-25',d:'25.09',aud:'Строители, проектировщики, изыскатели',t:'Заказчик уходит в банкротство: что делать подрядчику (совместно с адвокатом Хусейном Тухашевым)',st:'прошёл',info:'Запись выходит постом 28.09, текст есть в контент-плане недели. Ссылка на запись: my.mts-link.ru/j/Urreshenie/25274861824/record-new/24723859723.'},
+{iso:'2026-10-01',d:'01.10',aud:'Проектировщики',t:'Ошибки в техническом задании и исходных данных: кто отвечает за переделку проекта, дополнительные работы и нарушение сроков',st:'ближайший',land:'urreshenie.ru/tz-ishodnye-dannye-webinar-01-10-2026',chk:'5 действий проектировщика при обнаружении ошибок или изменений в техническом задании и исходных данных, чтобы не потерять деньги и сроки',next:'Все тексты недели готовы: см. «Текущая неделя». Запись выходит 02.10.'},
+{iso:'2026-10-08',d:'08.10',aud:'Строители, проектировщики, изыскатели',t:'Как исполнителю расторгнуть проблемный договор с заказчиком и получить деньги за выполненные работы',st:'план',land:'urreshenie.ru/[slug]-webinar-08-10-2026',chk:'[название чек-листа с лендинга]',next:'Тексты недели 5–9.10 готовы как образец. Мостик: на 15.10 (изыскатели).'},
+{iso:'2026-10-15',d:'15.10',aud:'Изыскатели',t:'Объём инженерных изысканий оказался недостаточным: кто отвечает за дополнительные работы, повторные изыскания и замечания экспертизы',st:'план',land:'urreshenie.ru/[slug]-webinar-15-10-2026',chk:'[название чек-листа с лендинга]',next:'Вторник 13.10 кейс, среда 14.10: «Как вы фиксируете договорённости с заказчиком?»'},
+{iso:'2026-10-22',d:'22.10',aud:'Проектировщики',t:'Проект прошёл экспертизу, но ошибки обнаружили на стройке: кто отвечает за переделку проекта, дополнительные работы и убытки',st:'план',land:'urreshenie.ru/[slug]-webinar-22-10-2026',chk:'[название чек-листа с лендинга]',next:'Вторник 20.10 совет, среда 21.10: «Как часто заказчик задерживает оплату?»'},
+{iso:'2026-10-29',d:'29.10',aud:'Строители, проектировщики, изыскатели',t:'44-ФЗ и 223-ФЗ в строительстве и проектировании: когда и как можно изменить цену, объём и сроки работ',st:'план',land:'urreshenie.ru/[slug]-webinar-29-10-2026',chk:'[название чек-листа с лендинга]',next:'Вторник 27.10 кейс, среда 28.10: «Кто в вашей компании отвечает за договоры с заказчиками?»'}
+];
+var F=[
+{n:'Пост в канале и соцсетях',t:'Верхняя часть воронки. Канал прогревает аудиторию между вебинарами и подводит к регистрации на следующий. Каждый пост должен вызывать понятное действие: регистрацию, переход, ответ в опросе, обращение.'},
+{n:'Анонс вебинара',t:'Понедельник: видеокружок с анонсом. Четверг: напоминание и чек-лист. Ссылка ведёт на лендинг вебинара с UTM-метками, а не прямо на MTS Link.'},
+{n:'Лендинг (Тильда)',t:'Отдельный лендинг под каждый вебинар: urreshenie.ru/<тема>-webinar-<дд-мм-гггг>. Форма регистрации единая, универсальная под все темы; разница между темами в заголовке и тексте страницы. Известная проблема: отвал на поле «Телефон» (решает Дмитрий).'},
+{n:'Регистрация (MTS Link)',t:'Регистрация идёт через MTS Link. Он не отдаёт источник регистрации, поэтому результат воронки считается по переходам на лендинг.'},
+{n:'Вебинар',t:'Четверг, 17:00 по Москве, примерно четыре в месяц, около 50 участников на эфир. Спикер по умолчанию Эдуард Каракозов. Запись выходит в пятницу.'},
+{n:'CTA',t:'Устный CTA спикера без слайда на экране ловит острую проблему аудитории и ведёт на посадочную страницу-разбор темы. Финальный CTA ведёт на узкий конкретный вход, например на консультацию, а не сразу на страницу со всеми услугами.'},
+{n:'Страница решений',t:'Страница с раздельными кнопками под шесть продуктов: consultation_30, express_20, audit_100, support, court, free_meeting. У каждой кнопки своё аналитическое событие и UTM-разметка по каналам. Страница услуг: urreshenie.ru/uslugi.'},
+{n:'Bitrix24',t:'Регистрация, предквалификация, постквалификация, затем «В работе», «Встреча» или «Отложенный спрос».'},
+{n:'Лид-менеджер',t:'Дарья ведёт Bitrix24 CRM, доводит лидов до сделки и видит, какие вопросы задают клиенты. К ней можно обратиться, чтобы узнать, что происходит с лидами после вебинара.'}
+];
+var T=[
+{n:'Дмитрий',z:'Стратегия, маркетинговый план, авторство и контроль контента, CTA-архитектура, сайт (Тильда, SEO, доработки в Bitrix24); курирует посевы и работу SMM. Утверждает каждый пост перед публикацией.',w:'Всё, что касается логики канала, приоритетов, доступов, согласования'},
+{n:'Эдуард Каракозов',z:'Руководитель ИЮР, спикер вебинаров, делится делами и краткими формулировками советов (по запросу пополняет банк); финально согласует контент-план и крупные решения.',w:'Новое дело или совет по запросу (краткая формулировка до понедельника), экспертная правка, детали дела, гости и спикеры'},
+{n:'Михаил',z:'Реклама (Директ и т.п.); KPI: стоимость лида (CPL), соблюдение бюджета.',w:'Если реклама берёт материал из канала'},
+{n:'Посевщик',z:'Закупка размещений в Telegram, MAX, VK; KPI: стоимость регистрации с канала, поиск 3–5 новых площадок в каждый цикл (часть старых уже выработана).',w:'Тексты размещений и креатив под конкретный вебинар; erid из ОРД-токена'},
+{n:'Наталья',z:'Продюсер видео: референсы, организация съёмок. Сценарии не пишет, их пишет SMM.',w:'Дата и место съёмки, реквизит, участники'},
+{n:'Монтажёр (Александр)',z:'Монтаж видео.',w:'Сроки и правки по роликам'},
+{n:'Дарья',z:'Лид-менеджер, ведёт Bitrix24 CRM, видит воронку с той стороны, куда попадают лиды после вебинаров и лендингов.',w:'Что происходит с лидами, какие вопросы задают клиенты'},
+{n:'Екатерина',z:'Записывает видеокружки; в пятницу говорит, что можно публиковать. Также ведёт страницу /community и анкету к ней. Аккаунт Instagram привязан к её рабочей почте.',w:'Готов ли кружок и когда его публиковать; контент для аудитории юристов'}
+];
+var WEEK1=['Прочитать регламент (часть 2) и пакет передачи','Получить доступы у Дмитрия и Эдуарда (пароли только лично или через менеджер паролей)','Получить брендгайд и шаблоны карточек в Figma, образец сценария и шаблоны обложек','Открыть таблицы советов и кейсов и выбрать материал на следующую неделю','Сверить текущий план 28.09–02.10 и образец 5–9 октября','Назначить созвон с Дмитрием и Эдуардом Каракозовым','Подготовить контент-план следующей недели к планёрке в понедельник','Отправить первый отчёт в понедельник в 10:00 (Метрика + соцсети + выводы)'];
+var CHECK=['Факты, суммы и номера дел сверены с первоисточником.','Заголовок на карточке и в тексте поста совпадает.','Ссылка ведёт на нужный лендинг и содержит UTM-метки.','Дата и время вебинара в анонсе и напоминании верные (четверг, 17:00 по Москве).','Орфография и пунктуация проверены, нет опечаток в именах и названиях.','Нет обещаний результата в суде и гарантий исхода.','Эмодзи из утверждённого набора.','Материал опубликован в нужное время и во всех запланированных сетях.','Отметка о публикации сделана в таблице советов или кейсов, если материал оттуда.','Пост утверждён Дмитрием.'];
+var LEARN=[{"n": "1", "t": "Анализ конкурентов", "d": "Чтобы понимать, какие темы и форматы работают у других юридических и B2B-каналов, не копируя их.", "l": [["Анализ конкурентов: что это, как провести, примеры", "https://practicum.yandex.ru/blog/kak-provesti-analiz-konkurentov/"], ["Анализ конкурентов: пошаговая инструкция и методы", "https://www.bitrix24.ru/journal/analiz-konkurentov/"], ["Анализ конкурентов в соцсетях: руководство для SMM-специалистов", "https://smmplanner.com/blog/analiz-konkurientov-v-sotssietiakh-ghaid/"], ["Гайд по анализу конкурентов в интернете для новичков", "https://vc.ru/marketing/1440597-gaid-po-analizu-konkurentov-v-internete-poshagovoe-rukovodstvo-ch2-dlya-novichkov"]]}, {"n": "2", "t": "Анализ целевой аудитории (B2B)", "d": "У ИЮР аудитория неоднородна: у строителей, проектировщиков и изыскателей своя боль и свой язык; решение в B2B принимает цикл внутри компании.", "l": [["Портрет клиента: анализ ЦА в B2B и B2C", "https://blog.click.ru/growthhacking/portret-potrebitelya-v-b2b-i-b2c-segmentax-v-chem-otlichiya/"], ["Сегментирование B2B-рынка: как определить ЦА", "https://www.mtt.ru/support/blog/segmentatsiya-tselevoy-auditorii-v-b2b-metody-primery-ispolzovaniya/"], ["Как составить портрет клиента в B2B", "https://companies.rbc.ru/news/HKhrDpQZdM/kak-sostavit-portret-klienta-v-b2b-poshagovoe-rukovodstvo/"], ["Составляем B2B-аватар клиента", "https://vc.ru/marketing/979310-sostavlyaem-b2b-avatar-klienta"]]}, {"n": "3", "t": "УТП и ценностное предложение", "d": "Отвечает на вопрос «почему ИЮР» конкретно, например «100+ судебных дел, 4,8 млрд ₽ взыскано», как в анонсах вебинаров.", "l": [["УТП: что это и как составить", "https://www.calltouch.ru/blog/glossary/utp-unikalnoe-torgovoe-predlozhenie/"], ["Что такое УТП, если продукт как у конкурентов", "https://kokoc.com/blog/utp-chto-eto/"], ["Уникальное торговое предложение на примерах", "https://skillbox.ru/media/marketing/unikalnoe-torgovoe-predlozhenie-izuchaem-kontseptsiyu-na-primerakh-i-sozdayem-silnoe-utp/"], ["Как составить УТП: примеры и ошибки", "https://sendsay.ru/blog/km/unikalnoe-torgovoe-predlozhenie-utp/"]]}, {"n": "4", "t": "Контент-план для B2B", "d": "Юридический B2B имеет долгий цикл решения, канал прогревает аудиторию между вебинарами, а не продаёт напрямую.", "l": [["Контент-стратегия для B2B: кейс и чек-листы", "https://habr.com/ru/companies/click/articles/476728/"], ["Эффективная контент-стратегия для B2B", "https://convertmonster.ru/blog/marketing-blog/content-strategy-b2b-top-managers-26/"], ["Контент-стратегия B2B: матрица стадий, тем и форматов", "https://gstory.ru/blog/kontent-strategiya-b2b"], ["Как составить контент-план для бренда", "https://digital.econ.msu.ru/blog/kak-sostavit-kontent-plan-dlya-brenda/"]]}, {"n": "5", "t": "Маркировка рекламы, токен ОРД/erid (посевы)", "d": "Любая реклама в интернете, включая посты в Telegram, маркируется идентификатором erid; без этого штраф заказчику и исполнителю. В ИЮР шаг входит в процесс посевов после договорённости с админом и согласования договора с Эдуардом; нужен ли токен, уточняется по каждому случаю.", "l": [["Как маркировать рекламу: инструкция по работе с ОРД", "https://mpstats.io/media/business/pravo/kak-markirovat-reklamu-instrukciya"], ["Как получить токен и где его размещать", "https://skillbox.ru/media/marketing/kak-poluchit-token-dlya-internetreklamy-i-gde-ego-razmeshchat-poshagovaya-instruktsiya/"], ["Как получить токен для маркировки рекламы", "https://www.unisender.com/ru/blog/kak-poluchit-token-dlya-markirovki-reklamy/"], ["Маркировка рекламы в Telegram в 2026", "https://elama.ru/blog/teper-cherez-elama-mozhno-promarkirovat-reklamu-v-telegram-ads/"], ["Маркировка интернет-рекламы: erid, ОРД, ЕРИР", "https://cleverdata.ru/blog/statii/markirovka-internet-reklamy-erir-ord-erid"]]}, {"n": "6", "t": "Копирайтинг и tone of voice", "d": "Тексты должны звучать одинаково, кто бы их ни писал. Для ИЮР тон уже сложился, статьи помогают понять логику, а не придумывать его заново.", "l": [["Tone of Voice: как прописать и примеры", "https://livedune.com/ru/blog/tone-of-voice/"], ["Tone of voice: 5 шагов как разработать", "https://lpgenerator.ru/blog/chto-takoe-tone-of-voice/"], ["Что такое tone of voice и как копирайтеру его применять", "https://digitalbroccoli.com/ru/tone-of-voice-how-to/"], ["Tone of voice в копирайтинге: какой бывает", "https://zhir.media/tone-of-voice-v-kopirajtinge-chto-eto-i-kakoj-byvaet/"]]}, {"n": "7", "t": "Визуальное оформление карточек", "d": "Правила ИЮР уже зафиксированы, статьи дают общие принципы.", "l": [["Дизайн и оформление в соцсетях", "https://blog.smm.school/dizajn-dlya-socsetej-kak-sozdavat-vizual-i-oformlyat-gruppy-i-posty/"], ["Как создавать крутые карточки для постов", "https://smmplanner.com/blog/kak-sozdavat-krutyie-kartochki/"], ["Идея для поста: как сделать пост-карточку", "https://smmplanner.com/blog/idieia-dlia-posta-kartochki/"], ["Готовые шаблоны картинок для соцсетей", "https://smmplanner.com/blog/gdie-brat-ghotovyie-shablony-kartinok-dlia-sotssietiei-i-kak-ikh-adaptirovat/"]]}, {"n": "8", "t": "Метрики и аналитика SMM", "d": "Смотреть нужно охват, вовлечённость (ER), динамику подписчиков, переходы по ссылкам; в ИЮР добавляются стабильность выхода контента и конверсия в регистрации.", "l": [["Эффективность SMM: какие метрики использовать", "https://news.pressfeed.ru/32-metriki-dlya-oczenki-smm-i-soczsetej/"], ["KPI в SMM: метрики оценки эффективности", "https://markway.ru/blog/kpi-v-smm-metriki-effektivnosti-v-soczsetyah/"], ["Основные метрики SMM: что отслеживать", "https://crmindex.ru/services/kvitly/blog/osnovnye_metriki_smm_chto_vajno_otslejivat_i_kak_eto_delat"]]}, {"n": "9", "t": "UTM-метки и аналитика посевов", "d": "Чтобы считать стоимость регистрации с каждого канала.", "l": [["Аналитика рекламы в Telegram: эффективность посевов в 2026", "https://elama.ru/blog/est-li-analitika-v-telegram-razbiraemsya-kak-ocenivat-effektivnost-reklamnyh-posevov/"], ["UTM-метки: как отследить эффективность маркетинга", "https://www.carrotquest.io/blog/utm-metki/"], ["Полный гид по UTM-меткам", "https://inclusif.ru/instrumenty/utm-metki/polnyy-gid-po-utm-metkam"], ["Что такое UTM-метки и как использовать для сегментации", "https://mindbox.ru/journal/education/chto-takoe-utm-metki/"]]}];
+
+/* ---------- сегодня ---------- */
+var now=new Date(),dow=now.getDay();
+function dstr(d){return ('0'+d.getDate()).slice(-2)+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+d.getFullYear()}
+$('#tdTitle').textContent=DN[dow]+', '+dstr(now);
+$('#tdSub').textContent=DAYS[dow]?DAYS[dow].pub+'. '+DAYS[dow].where:'Публикаций нет. Хороший день, чтобы подготовить материалы недели: в понедельник планёрка и отчёт в 10:00.';
+var t0=new Date(now.getFullYear(),now.getMonth(),now.getDate()),nx=null;
+W.forEach(function(w){var p=w.iso.split('-'),d=new Date(+p[0],+p[1]-1,+p[2]);w.date=d;if(!nx&&d>=t0)nx=w});
+if(nx){var diff=Math.round((nx.date-t0)/86400000);$('#nwTitle').textContent=nx.d+', 17:00 Мск';$('#nwSub').textContent=(diff===0?'Сегодня. ':diff===1?'Завтра. ':'Через '+diff+' дн. ')+nx.aud+': '+nx.t}else{$('#nwTitle').textContent='Расписание закончилось';$('#nwSub').textContent='Уточните новую сетку у Дмитрия'}
+
+/* ---------- вкладки дней ---------- */
+var dt=$('#dayTabs');
+[1,2,3,4,5].forEach(function(i){var b=document.createElement('button');b.className='tab'+(dow===i?' today':'');b.textContent=DAYS[i].n.slice(0,2)+(dow===i?' · сегодня':'');b.setAttribute('data-d',i);dt.appendChild(b)});
+function showDay(i){$$('.tab',dt).forEach(function(t){t.classList.toggle('on',+t.getAttribute('data-d')===i)});var d=DAYS[i];
+$('#dayBox').innerHTML='<h4>'+d.n+': '+esc(d.pub)+'</h4><div class="kv"><b>Где</b><div>'+esc(d.where)+'</div><b>Кто</b><div>'+esc(d.who)+'</div><b>Готовим</b><div><ul>'+d.prep.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul></div><b>Важно</b><div>'+esc(d.note)+'</div></div>'}
+dt.addEventListener('click',function(e){var t=e.target.closest('.tab');if(t)showDay(+t.getAttribute('data-d'))});
+showDay(DAYS[dow]?dow:1);
+
+/* ---------- таймлайн вебинаров ---------- */
+var wl=$('#wl');
+W.forEach(function(w,i){var c=document.createElement('div');c.className='wcard'+(w.date<t0?' past':'')+(w===nx?' next':'');c.setAttribute('data-i',i);
+c.innerHTML='<div class="d">'+w.d+'</div><div class="a">'+esc(w.aud)+'</div><div class="t">'+esc(w.t.split(':')[0])+'</div><span class="pill'+(w===nx?' ok':'')+'">'+(w.date<t0?'прошёл':w===nx?'ближайший':'план')+'</span>';wl.appendChild(c)});
+function showW(i){var w=W[i];$$('.wcard').forEach(function(c){c.classList.toggle('on',+c.getAttribute('data-i')===i)});
+var h='<h4>'+w.d+', 17:00 по Москве</h4><div class="kv"><b>Аудитория</b><div>'+esc(w.aud)+'</div><b>Тема</b><div>'+esc(w.t)+'</div>';
+if(w.land)h+='<b>Лендинг</b><div><code>'+esc(w.land)+'</code>'+(w.land.indexOf('[slug]')>-1?' <span class="pill w">slug уточнить</span>':'')+'</div>';
+if(w.chk)h+='<b>Чек-лист</b><div>'+(w.chk.charAt(0)==='['?'<span class="ph">'+esc(w.chk)+'</span>':'«'+esc(w.chk)+'»')+'</div>';
+if(w.info)h+='<b>Заметки</b><div>'+esc(w.info)+'</div>';
+if(w.next)h+='<b>Контент недели</b><div>'+esc(w.next)+'</div>';
+if(w.st==='ближайший'||w.st==='план')h+='<b>К вебинару готовим</b><div><ul><li>Лендинг на Тильде и форма регистрации</li><li>Анонс (понедельник), напоминание и чек-лист (четверг), запись (пятница) с UTM-метками</li><li>CTA-текст спикера</li><li>Мостик: один тематический пост канала для ссылки в конце вебинара</li></ul></div>';
+h+='</div>';$('#wBox').innerHTML=h}
+wl.addEventListener('click',function(e){var c=e.target.closest('.wcard');if(c)showW(+c.getAttribute('data-i'))});
+showW(nx?W.indexOf(nx):W.length-1);
+
+/* ---------- воронка ---------- */
+var fl=$('#flow');
+F.forEach(function(s,i){if(i){var a=document.createElement('span');a.className='ar';a.textContent='→';fl.appendChild(a)}var b=document.createElement('button');b.className='st';b.textContent=s.n;b.setAttribute('data-i',i);fl.appendChild(b)});
+function showF(i){$$('.st',fl).forEach(function(b){b.classList.toggle('on',+b.getAttribute('data-i')===i)});$('#flowBox').innerHTML='<h4>'+(i+1)+'. '+esc(F[i].n)+'</h4><p>'+esc(F[i].t)+'</p>'}
+fl.addEventListener('click',function(e){var b=e.target.closest('.st');if(b)showF(+b.getAttribute('data-i'))});showF(0);
+
+/* ---------- команда ---------- */
+var tg=$('#teamGrid');
+T.forEach(function(p,i){var c=document.createElement('div');c.className='person';c.setAttribute('data-i',i);c.innerHTML='<b>'+esc(p.n)+'</b><span>'+esc(p.z.split('.')[0].split(';')[0])+'</span>';tg.appendChild(c)});
+tg.addEventListener('click',function(e){var c=e.target.closest('.person');if(!c)return;var p=T[+c.getAttribute('data-i')];$$('.person',tg).forEach(function(x){x.classList.toggle('on',x===c)});var b=$('#teamBox');b.classList.remove('hide');b.innerHTML='<h4>'+esc(p.n)+'</h4><div class="kv"><b>Зона</b><div>'+esc(p.z)+'</div><b>Когда обращаться</b><div>'+esc(p.w)+'</div></div>'});
+
+/* ---------- учебные материалы ---------- */
+$('#learnBox').innerHTML=LEARN.map(function(b){return '<details><summary>'+b.n+'. '+esc(b.t)+' <span class="pill">'+b.l.length+' ссылок</span></summary><div><p>'+esc(b.d)+'</p><ul>'+b.l.map(function(l){return '<li><a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a></li>'}).join('')+'</ul></div></details>'}).join('');
+
+/* ---------- чек-листы ---------- */
+function checklist(key,items,ul,bar,txt){var st=store(key)||{};var el=$(ul);
+function draw(){el.innerHTML=items.map(function(t,i){return '<li data-i="'+i+'" class="'+(st[i]?'done':'')+'"><input type="checkbox" '+(st[i]?'checked':'')+'><span>'+esc(t)+'</span></li>'}).join('');var n=items.filter(function(_,i){return st[i]}).length;$(bar).style.width=(100*n/items.length)+'%';$(txt).textContent='Выполнено '+n+' из '+items.length}
+el.addEventListener('click',function(e){var li=e.target.closest('li');if(!li)return;var i=li.getAttribute('data-i');st[i]=!st[i];store(key,st);draw()});
+document.querySelector('[data-reset="'+key+'"]').addEventListener('click',function(){st={};store(key,st);draw()});draw()}
+checklist('week1',WEEK1,'#week1List','#pWeek1','#tWeek1');
+checklist('check',CHECK,'#checkList','#pCheck','#tCheck');
+
+/* ---------- копирование ---------- */
+document.addEventListener('click',function(e){var b=e.target.closest('[data-copy]');if(!b)return;var t=document.getElementById(b.getAttribute('data-copy')).textContent;
+function ok(){toast('Скопировано')}
+if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,fb)}else fb();
+function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(x){toast('Не удалось скопировать')}document.body.removeChild(a)}});
+
+/* ---------- переход по строкам ---------- */
+document.addEventListener('click',function(e){var r=e.target.closest('tr[data-go]');if(!r)return;var t=document.getElementById(r.getAttribute('data-go'));if(t){t.scrollIntoView({behavior:'smooth',block:'center'});t.style.transition='box-shadow .3s';t.style.boxShadow='0 0 0 3px var(--acc)';setTimeout(function(){t.style.boxShadow=''},1400)}});
+
+/* ---------- UTM ---------- */
+function utm(){var s=$('#slug').value.trim(),d=$('#wd').value.trim(),c=$('#camp').value.trim()||s,src=$('#src').value;
+if(!s||!d){$('#utmOut').textContent='Заполните адрес лендинга и дату';return}
+var dd=d.replace(/[^0-9]/g,'');$('#utmOut').textContent='https://urreshenie.ru/'+s+'-webinar-'+d+'?utm_source='+src+'&utm_medium=social&utm_campaign=webinar_'+c+'_'+dd+'&utm_content=post'}
+['slug','wd','camp','src'].forEach(function(id){$('#'+id).addEventListener('input',utm);$('#'+id).addEventListener('change',utm)});
+$('#utmFill').addEventListener('click',function(){$('#slug').value='tz-ishodnye-dannye';$('#wd').value='01-10-2026';$('#camp').value='tz';utm()});
+$('#utmFill2').addEventListener('click',function(){$('#slug').value='[slug]';$('#wd').value='08-10-2026';$('#camp').value='[slug]';utm()});
+
+/* ---------- отчёт ---------- */
+var RI=['rWeek','rDone','rPlan','rVis','rSoc','rWin','rConc'];
+function rep(){var g=function(i){return $('#'+i).value.trim()||'—'};var pl=+$('#rPlan').value,dn=+$('#rDone').value;var pc=pl?' ('+Math.round(100*dn/pl)+'%)':'';
+$('#rOut').textContent='Отчёт по SMM, неделя '+g('rWeek')+'\n\nПлан публикаций: '+(dn||'—')+' из '+(pl||'—')+pc+'\nМетрика, визиты на лендинги (эта / прошлая): '+g('rVis')+'\nСоцсети: '+g('rSoc')+'\nЧто сработало: '+g('rWin')+'\nВыводы: '+g('rConc')}
+RI.forEach(function(id){$('#'+id).addEventListener('input',function(){rep();store('rep_'+id,$('#'+id).value)});var v=store('rep_'+id);if(v)$('#'+id).value=v});rep();
+
+/* ---------- меню, поиск, прогресс ---------- */
+var secs=$$('.sec'),nav=$('#nav'),part='',html='';
+secs.forEach(function(s){var p=s.getAttribute('data-part');if(p!==part){part=p;html+='<div class="navpart">'+esc(p)+'</div>'}html+='<a href="#'+s.id+'" data-s="'+s.id+'">'+esc($('h2',s).textContent)+'</a>'});
+nav.innerHTML=html;
+nav.addEventListener('click',function(){$('aside').classList.remove('open')});
+$('#burger').addEventListener('click',function(){$('aside').classList.toggle('open')});
+var idx=secs.map(function(s){return s.textContent.toLowerCase()});
+function unmark(){$$('mark').forEach(function(m){var p=m.parentNode;p.replaceChild(document.createTextNode(m.textContent),m);p.normalize()})}
+function mark(q){var re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');var n=0;
+secs.forEach(function(s){if(s.classList.contains('hide'))return;var w=document.createTreeWalker(s,NodeFilter.SHOW_TEXT,{acceptNode:function(x){var pn=x.parentNode.nodeName;return (pn==='SCRIPT'||pn==='STYLE'||pn==='TEXTAREA'||pn==='MARK')?NodeFilter.FILTER_REJECT:(re.test(x.nodeValue)?(re.lastIndex=0,NodeFilter.FILTER_ACCEPT):NodeFilter.FILTER_REJECT)}});var nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+nodes.forEach(function(x){var f=document.createDocumentFragment(),t=x.nodeValue,l=0,m;re.lastIndex=0;while((m=re.exec(t))){f.appendChild(document.createTextNode(t.slice(l,m.index)));var mk=document.createElement('mark');mk.textContent=m[0];f.appendChild(mk);l=m.index+m[0].length;n++;if(m[0].length===0)re.lastIndex++}f.appendChild(document.createTextNode(t.slice(l)));x.parentNode.replaceChild(f,x)});
+$$('details',s).forEach(function(d){if($('mark',d))d.open=true})});return n}
+$('#q').addEventListener('input',function(){var q=this.value.trim().toLowerCase();unmark();var shown=0;
+secs.forEach(function(s,i){var ok=!q||idx[i].indexOf(q)>-1;s.classList.toggle('hide',!ok);var a=$('a[data-s="'+s.id+'"]',nav);if(a)a.classList.toggle('off',!ok);if(ok)shown++});
+$$('.navpart',nav).forEach(function(p){var n=p.nextElementSibling,any=false;while(n&&!n.classList.contains('navpart')){if(!n.classList.contains('off'))any=true;n=n.nextElementSibling}p.style.display=any?'':'none'});
+$('#qinfo').textContent=q?('Разделов: '+shown+', совпадений: '+(q.length>1?mark(q):0)):''});
+$('#expand').addEventListener('click',function(){var ds=$$('details'),open=ds.some(function(d){return !d.open});ds.forEach(function(d){d.open=open});this.textContent=open?'Свернуть всё':'Раскрыть всё'});
+$('#print').addEventListener('click',function(){$$('details').forEach(function(d){d.open=true});window.print()});
+var pr=$('#prog');
+function onScroll(){var h=document.documentElement;pr.style.width=(100*h.scrollTop/(h.scrollHeight-h.clientHeight||1))+'%';var cur=null;secs.forEach(function(s){if(!s.classList.contains('hide')&&s.getBoundingClientRect().top<160)cur=s.id});$$('a',nav).forEach(function(a){a.classList.toggle('on',a.getAttribute('data-s')===cur)})}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script></body></html>
