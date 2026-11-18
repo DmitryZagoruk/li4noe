@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ваш собственный Word за 15 минут</title>
+<style>
+  :root{
+    --bg:#f4f2ec; --card:#fff; --text:#1f2328; --muted:#646b75; --line:#e2dfd6;
+    --red:#e5322d; --blue:#185abd; --mblue:#0067b8; --winline:#cfcfcf;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:18px/1.55 -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  .wrap{max-width:740px;margin:0 auto;padding:28px 16px 60px}
+  h1{font-size:30px;line-height:1.2;margin:0 0 10px}
+  .lead{color:#3d434b;margin:0 0 16px}
+  .box{border-radius:12px;padding:12px 16px;font-size:16.5px;margin:0 0 12px}
+  .box.yellow{background:#fff7d6}
+  .box.green{background:#e6f4ea}
+  .box.blue{background:#e8f0fe}
+  .need{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin:18px 0}
+  .need h3{margin:0 0 8px;font-size:19px}
+  .need ul{margin:0;padding-left:22px}
+  .need li{margin:4px 0}
+  nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+  nav a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:15px;color:var(--text);text-decoration:none}
+  .part{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:38px 0 4px}
+  .part-sub{margin:0 0 6px;color:#444;font-size:17px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0}
+  .step h2{font-size:21px;line-height:1.3;margin:0 0 10px;display:flex;gap:12px;align-items:flex-start}
+  .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-size:17px;display:inline-flex;align-items:center;justify-content:center;margin-top:-2px}
+  .step p{margin:6px 0 12px;color:#2f343a}
+  .do{background:#f6f8fc;border-left:4px solid var(--blue);border-radius:8px;padding:10px 14px;margin:10px 0 14px}
+  .do ol{margin:0;padding-left:22px}
+  .do li{margin:5px 0}
+  .after{font-size:16.5px;color:#3d434b;margin:12px 0 0}
+  .warn{background:#fff4d6;border-radius:8px;padding:10px 14px;font-size:16px;margin:12px 0 0}
+  .big-link{display:inline-block;margin:2px 0 14px;padding:10px 18px;border-radius:10px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600}
+  .tag{display:inline-block;background:#e8f0fe;color:#0b3d91;border:1px solid #c5d7fb;border-radius:5px;padding:0 6px;font-weight:600;white-space:nowrap}
+
+  /* ---------- экраны ---------- */
+  .screen{border:1px solid var(--winline);border-radius:10px;background:#fff;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);font-family:"Segoe UI",Arial,sans-serif;color:#242424}
+  .bar{border-radius:10px 10px 0 0;background:#e9e9e9;border-bottom:1px solid var(--winline);padding:7px 10px;display:flex;align-items:center;gap:8px;font-size:13px;color:#333}
+  .dots{display:flex;gap:5px}.dots i{width:10px;height:10px;border-radius:50%;background:#c9c9c9;display:block}
+  .url{flex:1;background:#fff;border:1px solid #d5d5d5;border-radius:14px;padding:3px 12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .url::before{content:"🔒 ";font-size:11px}
+  .muted{color:#707070}
+  .ms-page{background:#f2f2f2;padding:26px 12px;border-radius:0 0 10px 10px}
+  .ms-card{max-width:400px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.1);padding:26px 28px}
+  .ms-brand{display:flex;align-items:center;gap:8px;font-weight:600;color:#5e5e5e;font-size:15px;margin-bottom:16px}
+  .ms-brand i{display:grid;grid-template-columns:8px 8px;gap:2px}
+  .ms-brand i b{width:8px;height:8px;background:#a0a0a0;display:block}
+  .ms-card h3{margin:0 0 6px;font-size:22px;font-weight:600}
+  .ms-card .sub{font-size:13.5px;color:#444;margin-bottom:16px}
+  .field{border:1px solid #8a8a8a;border-radius:6px;padding:9px 12px;margin:6px 0 4px;color:#222;background:#fff}
+  .field.empty{color:#8a8a8a}
+  .flabel{font-size:12.5px;color:#444;margin-top:10px}
+  .ms-link{color:var(--mblue);font-size:13px;display:block;margin:10px 0}
+  .ms-btn{display:block;text-align:center;background:var(--mblue);color:#fff;border-radius:6px;padding:9px;font-weight:600;margin-top:16px}
+  .ms-btn.ghost{background:#fff;color:#242424;border:1px solid #8a8a8a;font-weight:500;margin-top:8px}
+  .row2{display:flex;gap:8px}.row2>div{flex:1}
+  .sel{position:relative}.sel::after{content:"⌄";position:absolute;right:10px;top:4px;color:#555}
+  .code{display:flex;gap:8px;margin:14px 0 6px}
+  .code span{flex:1;max-width:44px;height:48px;border:1px solid #8a8a8a;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600}
+  .hold{margin:16px auto 4px;width:220px;height:46px;border-radius:24px;background:#e8e8e8;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:600}
+  .hold::before{content:"";position:absolute;left:0;top:0;bottom:0;width:58%;background:#0067b8;opacity:.25}
+  .mail{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid #eee;align-items:flex-start}
+  .mail .av{width:34px;height:34px;border-radius:50%;background:#e1ecfa;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--mblue)}
+  .bigcode{font-size:26px;font-weight:700;letter-spacing:6px;margin:6px 0}
+
+  .w-head{background:var(--blue);color:#fff;display:flex;align-items:center;gap:12px;padding:8px 14px;font-size:14px}
+  .waffle{display:grid;grid-template-columns:repeat(3,4px);gap:2px}.waffle b{width:4px;height:4px;background:#fff;display:block}
+  .w-search{flex:1;max-width:280px;background:rgba(255,255,255,.92);color:#666;border-radius:4px;padding:3px 10px;font-size:12.5px;margin:0 auto}
+  .avatar{width:26px;height:26px;border-radius:50%;background:#fff;color:var(--blue);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:12px}
+  .w-body{display:flex;border-radius:0 0 10px 10px;overflow:hidden}
+  .rail{width:64px;background:#f5f5f5;border-right:1px solid #e6e6e6;padding:10px 0;font-size:10.5px;text-align:center;color:#444;flex:none}
+  .rail div{padding:7px 2px}.rail .on{color:var(--blue);font-weight:600}
+  .rail span{display:block;font-size:16px;line-height:1}
+  .w-main{flex:1;padding:14px 16px;min-width:0}
+  .w-main h4{margin:0 0 10px;font-size:15px}
+  .tiles{display:flex;gap:12px;flex-wrap:wrap}
+  .tile{width:104px;font-size:12px;text-align:center}
+  .tile b{display:block;height:128px;border:1px solid #d6d6d6;border-radius:4px;background:#fff;margin-bottom:6px;position:relative}
+  .tile.tpl b{background:linear-gradient(#dfe9f8 0 24%,#fff 24%)}
+  .tile.tpl b::after{content:"";position:absolute;left:14px;right:14px;top:38%;height:44%;background:repeating-linear-gradient(#e3e3e3 0 3px,transparent 3px 9px)}
+  .recent-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 6px}
+  .upl{border:1px solid #c8c8c8;border-radius:4px;padding:3px 10px;font-size:12.5px;background:#fff}
+  .recent{font-size:12.5px;color:#555;border-top:1px solid #eee;padding:7px 0}
+
+  .titlebar{background:var(--blue);color:#fff;display:flex;align-items:center;gap:12px;padding:7px 14px;font-size:13.5px}
+  .docname{display:flex;align-items:center;gap:8px}
+  .saved{font-size:12px;opacity:.95}
+  .tabs{display:flex;gap:14px;padding:6px 12px 0;background:#f5f5f5;font-size:13px;overflow:hidden}
+  .tabs span{padding:3px 2px 6px;white-space:nowrap}
+  .tabs .on{border-bottom:3px solid var(--blue);font-weight:600}
+  .tools{display:flex;gap:8px;align-items:center;padding:6px 12px;background:#fff;border-bottom:1px solid #e3e3e3;font-size:12.5px;flex-wrap:wrap}
+  .tools .t{border:1px solid #d6d6d6;border-radius:3px;padding:1px 7px;background:#fff}
+  .tools .sep{width:1px;height:18px;background:#ddd}
+  .right-btns{margin-left:auto;display:flex;gap:6px}
+  .pill{border:1px solid #c8c8c8;border-radius:4px;padding:2px 8px;font-size:12px;background:#fff;color:#242424}
+  .pill.share{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .canvas{background:#eceae6;padding:16px;border-radius:0 0 10px 10px}
+  .sheet{background:#fff;min-height:170px;width:72%;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.2);padding:18px 22px;font-size:12px;color:#333}
+  .rename{position:absolute;top:32px;left:0;width:250px;background:#fff;color:#242424;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.25);padding:12px 14px;z-index:4;font-size:12.5px}
+
+  .bs{display:flex;min-height:300px;border-radius:0 0 10px 10px;overflow:hidden}
+  .bs-left{width:38%;background:#f3f2f1;border-right:1px solid #e1dfdd;padding:10px 0;flex:none}
+  .bs-left div{padding:8px 16px;font-size:13.5px}
+  .bs-left .back{color:#444}
+  .bs-left .selected{background:#fff;border-left:3px solid var(--blue);font-weight:600;padding-left:13px}
+  .bs-right{flex:1;padding:16px 18px;min-width:0}
+  .bs-right h4{margin:0 0 12px;font-size:18px;font-weight:600}
+  .opt{border:1px solid #e1e1e1;border-radius:6px;padding:10px 12px;margin:0 0 10px;display:flex;gap:12px;align-items:center}
+  .ficon{width:28px;height:34px;border-radius:3px;flex:none;display:flex;align-items:flex-end;justify-content:center;font-size:8.5px;font-weight:700;padding-bottom:3px}
+  .ficon.w{background:#e3ecfa;border:1px solid #9fb8e3;color:var(--blue)}
+  .ficon.p{background:#fde7e7;border:1px solid #e3a8a8;color:#b42318}
+  .ficon.c{background:#f0f0f0;border:1px solid #c8c8c8;color:#666}
+  .opt small{display:block;color:#666;font-size:12px;font-weight:400}
+  .dialog-wrap{background:rgba(0,0,0,.35);padding:30px 14px;border-radius:0 0 10px 10px}
+  .dialog{max-width:360px;margin:0 auto;background:#fff;border-radius:8px;padding:20px 22px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  .dialog h4{margin:0 0 8px;font-size:17px}
+  .dialog .btns{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+  .db{border:1px solid #8a8a8a;border-radius:4px;padding:4px 14px;font-size:13px}
+  .db.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+
+  /* ---------- подсветка ---------- */
+  .hl{position:relative;outline:3px solid var(--red);outline-offset:3px;border-radius:5px;animation:pulse 1.6s ease-in-out infinite}
+  .hl[data-n]::after{content:attr(data-n);position:absolute;top:-14px;right:-14px;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;font:700 13px/24px Arial,sans-serif;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,.25);z-index:5}
+  @keyframes pulse{0%,100%{outline-color:var(--red)}50%{outline-color:rgba(229,50,45,.35)}}
+
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 20px;margin:16px 0}
+  .faq details{border-bottom:1px solid var(--line);padding:13px 0}
+  .faq details:last-child{border-bottom:none}
+  .faq summary{cursor:pointer;font-weight:600}
+  .faq p{margin:8px 0 0;color:#333;font-size:17px}
+  .contact{background:#185abd;color:#fff;border-radius:16px;padding:18px 20px;margin:24px 0 0;font-size:17px}
+  footer{color:var(--muted);font-size:14px;text-align:center;margin-top:24px}
+  footer a{color:var(--muted)}
+  @media(max-width:540px){
+    body{font-size:17px} h1{font-size:25px}
+    .step{padding:15px} .screen{font-size:12.5px}
+    .ms-card{padding:20px 18px} .ms-card h3{font-size:19px}
+    .rail{display:none} .w-search{display:none} .w-head .avatar{margin-left:auto} .rename{left:-70px;width:210px} .wrap{overflow-x:hidden}
+    .tile{width:84px} .tile b{height:104px}
+    .tabs .x,.tools .x{display:none}
+    .sheet{width:88%}
+    .bs-left{width:44%} .bs-left div{padding:7px 10px;font-size:12.5px} .bs-left .selected{padding-left:7px}
+    .bs-right{padding:12px}
+  }
+  @media print{ nav,.big-link{display:none} .step{break-inside:avoid} body{background:#fff} }
+
+  .progress{position:sticky;top:0;z-index:20;background:rgba(244,242,236,.96);backdrop-filter:blur(4px);border-bottom:1px solid var(--line)}
+  .progress-in{max-width:740px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:14px;font-size:14.5px;font-weight:600;color:#2f343a}
+  .pbar{flex:1;height:10px;background:#e2dfd6;border-radius:6px;overflow:hidden}
+  .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1a7f37,#2fb35a);border-radius:6px;transition:width .4s}
+  .hello{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px 10px;margin:6px 0 16px}
+  .wave{font-size:40px;line-height:1;margin-bottom:8px}
+  .hello .lead{margin:0 0 12px}
+  .dict{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 20px;margin:0 0 10px}
+  .dict summary{cursor:pointer;font-weight:600}
+  .dict dl{margin:10px 0 4px}
+  .dict dt{font-weight:700;margin-top:10px}
+  .dict dd{margin:2px 0 0;color:#3d434b;font-size:16.5px}
+  .ifnot{margin:14px 0 0;background:#f7f7f5;border-radius:10px;padding:10px 14px}
+  .ifnot summary{cursor:pointer;font-weight:600;color:#3d434b}
+  .ifnot p{font-size:16.5px;margin:8px 0 0}
+  .tip{background:#fff7d6;border-radius:10px;padding:11px 14px;font-size:16.5px;margin:14px 0 0}
+  .cheer{background:linear-gradient(135deg,#e6f4ea,#d6f0de);border-radius:16px;padding:16px 20px;margin:22px 0 4px;font-size:17.5px}
+  .cheer.final{background:linear-gradient(135deg,#fff1c4,#ffe08a);font-size:19px}
+  .cheat div,.next div{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+  .cnum{flex:none;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;font:700 13px/24px Arial,sans-serif;text-align:center;margin-top:2px}
+  .next{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 20px;margin:14px 0}
+  .next .cnum{background:var(--blue)}
+  .cheat{margin:6px 0 16px}
+  .done-btn{display:block;width:100%;margin:18px 0 0;padding:13px;border:2px solid #1a7f37;background:#fff;color:#1a7f37;border-radius:12px;font-family:inherit;font-weight:600;font-size:17px;line-height:1.2;cursor:pointer}
+  .done-btn:hover{background:#f0faf3}
+  .step{scroll-margin-top:60px;transition:border-color .3s,background .3s}
+  .step.done{border-color:#9bd3ad;background:#fbfefc}
+  .step.done .n{background:#1a7f37}
+  .step.done .done-btn{background:#1a7f37;color:#fff}
+</style>
+</head>
+<body>
+<div class="progress" id="progress">
+  <div class="progress-in">
+    <span id="ptext">Пройдено 0 из 12 шагов</span>
+    <div class="pbar"><i id="pfill"></i></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="hello">
+  <div class="wave">👋</div>
+  <h1>Ваш собственный Word за 15 минут</h1>
+  <p class="lead">Сейчас у вас появится <b>настоящий Word</b> от Microsoft. Бесплатно, официально и без установки: он открывается прямо в интернете, как обычный сайт.</p>
+  <p class="lead">Ничего сложного тут нет и <b>ничего не сломается</b>. Просто идите по шагам сверху вниз и нажимайте то, что обведено <b style="color:#e5322d">красной рамкой</b>. Сделали шаг — жмите зелёную кнопку <b>«Готово»</b>, и полоска сверху будет заполняться 🙂</p>
+</div>
+
+<div class="need">
+  <h3>🧰 Что приготовить</h3>
+  <ul>
+    <li>💻 Компьютер или ноутбук с интернетом.</li>
+    <li>📧 Свою электронную почту, в которую вы можете зайти прямо сейчас (Яндекс, Mail.ru — любая). Туда придёт код.</li>
+    <li>☕ 15 минут и, по желанию, чашку чая.</li>
+  </ul>
+</div>
+
+<details class="dict">
+  <summary>📖 Маленький словарик (нажмите, если какое-то слово непонятно)</summary>
+  <dl>
+    <dt>Браузер</dt><dd>Программа, через которую вы открываете сайты: Яндекс Браузер, Google Chrome, Edge. Скорее всего, вы сейчас читаете это именно в нём.</dd>
+    <dt>Вкладка</dt><dd>Каждый открытый сайт в браузере — это вкладка, как закладка в папке. Они видны в самом верху окна. Можно переключаться между ними, нажимая на них.</dd>
+    <dt>Ссылка</dt><dd>Надпись или кнопка, на которую нажимаешь, и открывается сайт. В этой инструкции это синие кнопки со стрелочкой →.</dd>
+    <dt>Поле</dt><dd>Белый прямоугольник, в который можно печатать. Нажмите на него мышкой, появится мигающая палочка, и можно писать.</dd>
+    <dt>Папка «Загрузки»</dt><dd>Место на компьютере, куда попадают все скачанные файлы. Найти её можно, открыв «Этот компьютер» (или «Проводник»), она будет слева в списке.</dd>
+  </dl>
+</details>
+
+<!-- ================= ЧАСТЬ 1 ================= -->
+<div class="part">Часть 1 из 3 · Регистрация</div>
+<p class="part-sub">Делается <b>один раз</b>, займёт минут 5. Хорошая новость: пароль придумывать и запоминать <b>не нужно</b>. Входить вы будете по коду, который приходит на почту.</p>
+
+<div class="step" data-step="1">
+  <h2><span class="n">1</span>Откройте регистрацию и впишите свою почту</h2>
+  <a class="big-link" href="https://signup.live.com/" target="_blank" rel="noopener">Открыть регистрацию →</a>
+  <div class="do"><ol>
+    <li>Нажмите синюю кнопку выше. В браузере откроется новая вкладка с надписью «Создание учетной записи».</li>
+    <li>Нажмите мышкой на белое поле и напечатайте свою почту целиком, вместе с @. Например: <i>mama@yandex.ru</i>.</li>
+    <li>Нажмите синюю кнопку <span class="tag">Далее</span>.</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">signup.live.com</span></div>
+    <div class="ms-page">
+      <div class="ms-card">
+        <div class="ms-brand"><i><b></b><b></b><b></b><b></b></i>Microsoft</div>
+        <h3>Создание учетной записи</h3>
+        <div class="sub">Введите свой адрес электронной почты.</div>
+        <div class="flabel">Электронная почта</div>
+        <div class="field hl" data-n="1">mama@yandex.ru</div>
+        <span class="ms-link">Получить новый адрес электронной почты</span>
+        <span class="ms-btn hl" data-n="2">Далее</span>
+      </div>
+    </div>
+  </div>
+  <details class="ifnot"><summary>🤔 А если…</summary>
+    <p><b>…хочется нажать «Получить новый адрес»?</b> Не надо: это создаст новую почту, а нам подходит ваша обычная.</p>
+    <p><b>…пишет, что адрес уже используется?</b> Значит, у вас уже есть учётная запись Microsoft, и это даже лучше. Переходите сразу к шагу 7 и входите со своей почтой.</p>
+  </details>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="2">
+  <h2><span class="n">2</span>Выберите страну и дату рождения</h2>
+  <div class="do"><ol>
+    <li>Страна, скорее всего, уже стоит: <b>Россия</b>. Если нет, нажмите на поле и выберите её из списка.</li>
+    <li>Нажмите на поля с днём, месяцем и годом и выберите <b>свою</b> дату рождения. Аккаунт будет ваш, поэтому и дата ваша, а не ребёнка.</li>
+    <li>Нажмите <span class="tag">Далее</span>.</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">signup.live.com</span></div>
+    <div class="ms-page">
+      <div class="ms-card">
+        <div class="ms-brand"><i><b></b><b></b><b></b><b></b></i>Microsoft</div>
+        <div class="muted" style="font-size:13px">← mama@yandex.ru</div>
+        <h3 style="margin-top:8px">Добавьте сведения</h3>
+        <div class="sub">Нам нужны дополнительные сведения, прежде чем вы сможете использовать это приложение.</div>
+        <div class="flabel">Страна или регион</div>
+        <div class="field sel hl" data-n="1">Россия</div>
+        <div class="flabel">Дата рождения</div>
+        <div class="row2 hl" data-n="2" style="margin-top:6px">
+          <div class="field sel">15</div><div class="field sel">Март</div><div class="field sel">1985</div>
+        </div>
+        <span class="ms-btn hl" data-n="3">Далее</span>
+      </div>
+    </div>
+  </div>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="3">
+  <h2><span class="n">3</span>Напишите, как вас зовут</h2>
+  <div class="do"><ol>
+    <li>Впишите фамилию и имя. Их увидите только вы: Word будет так к вам обращаться.</li>
+    <li>Нажмите <span class="tag">Далее</span>.</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">signup.live.com</span></div>
+    <div class="ms-page">
+      <div class="ms-card">
+        <div class="ms-brand"><i><b></b><b></b><b></b><b></b></i>Microsoft</div>
+        <div class="muted" style="font-size:13px">← mama@yandex.ru</div>
+        <h3 style="margin-top:8px">Добавьте свое имя</h3>
+        <div class="sub">Нам нужны дополнительные сведения, прежде чем вы сможете использовать это приложение.</div>
+        <div class="hl" data-n="1" style="padding:2px 0">
+          <div class="flabel" style="margin-top:0">Фамилия</div><div class="field">Иванова</div>
+          <div class="flabel">Имя</div><div class="field">Елена</div>
+        </div>
+        <span class="ms-btn hl" data-n="2">Далее</span>
+      </div>
+    </div>
+  </div>
+  <details class="ifnot"><summary>🤔 А если…</summary>
+    <p><b>…сначала спросили имя, а потом дату?</b> Ничего страшного, Microsoft иногда меняет порядок. Просто заполняйте то, что спрашивают.</p>
+  </details>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="4">
+  <h2><span class="n">4</span>Загляните в почту за кодом 📬</h2>
+  <p>Microsoft отправила вам письмо с кодом из цифр. Так она убеждается, что почта правда ваша. Страницу регистрации <b>не закрывайте</b>, мы к ней вернёмся.</p>
+  <div class="do"><ol>
+    <li>Откройте свою почту: в новой вкладке или прямо на телефоне, так даже удобнее.</li>
+    <li>Найдите свежее письмо от Microsoft. В нём будет код из цифр.</li>
+    <li>Вернитесь на вкладку регистрации (нажмите на неё вверху окна) и впишите цифры. После последней цифры страница обычно сама идёт дальше.</li>
+  </ol></div>
+  <div class="screen" style="margin-bottom:14px">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">mail.yandex.ru</span></div>
+    <div class="mail">
+      <span class="av">M</span>
+      <div style="flex:1">
+        <b>Учетная запись Майкрософт</b> <span class="muted" style="font-size:12px">· сейчас</span>
+        <div style="font-weight:600;margin-top:2px">Подтвердите адрес электронной почты</div>
+        <div class="muted" style="font-size:13px;margin-top:6px">Для завершения регистрации используйте этот код:</div>
+        <div class="bigcode hl" data-n="1" style="display:inline-block;padding:0 6px">481527</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">signup.live.com</span></div>
+    <div class="ms-page">
+      <div class="ms-card">
+        <div class="ms-brand"><i><b></b><b></b><b></b><b></b></i>Microsoft</div>
+        <h3>Подтвердите адрес электронной почты</h3>
+        <div class="sub">Введите код, отправленный на mama@yandex.ru.</div>
+        <div class="code hl" data-n="2"><span>4</span><span>8</span><span>1</span><span>5</span><span>2</span><span>7</span></div>
+        <span class="ms-link">Отправить код повторно</span>
+      </div>
+    </div>
+  </div>
+  <details class="ifnot"><summary>🤔 А если…</summary>
+    <p><b>…письма нет?</b> Подождите пару минут и загляните в папку «Спам»: иногда письма прячутся там. Всё ещё нет — нажмите «Отправить код повторно».</p>
+    <p><b>…пишет, что код неверный?</b> Скорее всего, вы взяли код из старого письма. Возьмите цифры из самого нового.</p>
+  </details>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="5">
+  <h2><span class="n">5</span>Докажите, что вы не робот 🤖</h2>
+  <p>Забавный шаг: Microsoft проверяет, что регистрируется живой человек. Обычно для этого кнопку нужно просто <b>нажать и подержать</b>.</p>
+  <div class="do"><ol>
+    <li>Наведите мышку на кнопку «Нажмите и удерживайте».</li>
+    <li>Нажмите левую кнопку мыши и <b>не отпускайте</b> секунд 5–10, пока полоска не заполнится и не появится галочка.</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">signup.live.com</span></div>
+    <div class="ms-page">
+      <div class="ms-card" style="text-align:center">
+        <div class="ms-brand" style="justify-content:center"><i><b></b><b></b><b></b><b></b></i>Microsoft</div>
+        <h3>Давайте убедимся, что вы человек</h3>
+        <div class="sub">Нажмите и удерживайте кнопку.</div>
+        <div class="hold hl" data-n="1">Нажмите и удерживайте</div>
+      </div>
+    </div>
+  </div>
+  <details class="ifnot"><summary>🤔 А если…</summary>
+    <p><b>…вместо кнопки картинка-головоломка?</b> Просто делайте, что написано на экране. Не вышло с первого раза — это нормально, у всех бывает. Попробуйте ещё.</p>
+  </details>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="6">
+  <h2><span class="n">6</span>Отказываемся от лишнего: «Пропустить»</h2>
+  <p>В конце Microsoft может предложить входить по отпечатку пальца или ПИН-коду. Звучит солидно, но нам это не нужно: по коду из почты проще.</p>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">account.live.com</span></div>
+    <div class="ms-page">
+      <div class="ms-card">
+        <div class="ms-brand"><i><b></b><b></b><b></b><b></b></i>Microsoft</div>
+        <h3>Входите быстрее с ключом доступа</h3>
+        <div class="sub">Используйте лицо, отпечаток пальца или ПИН-код вместо кода из почты.</div>
+        <span class="ms-btn">Далее</span>
+        <span class="ms-btn ghost hl" data-n="1">Пропустить</span>
+      </div>
+    </div>
+  </div>
+  <p class="after">Кнопка может называться «Пропустить», «Не сейчас» или «Отмена». А если такое окно не появилось, совсем хорошо, идите дальше.</p>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="cheer">🎉 <b>Ура, самое скучное позади!</b> Учётная запись готова, больше эту часть делать не придётся. Дальше начинается самое интересное.</div>
+
+<!-- ================= ЧАСТЬ 2 ================= -->
+<div class="part">Часть 2 из 3 · Пишем доклад</div>
+
+<div class="step" data-step="7">
+  <h2><span class="n">7</span>Открываем Word и берём чистый лист</h2>
+  <a class="big-link" href="https://word.cloud.microsoft/" target="_blank" rel="noopener">Открыть Word →</a>
+  <div class="do"><ol>
+    <li>Нажмите синюю кнопку выше. Если Word попросит войти, впишите почту и код из письма, как в шаге 4.</li>
+    <li>Откроется ваш личный Word. В разделе «Создать» нажмите на белый лист с надписью <b>«Пустой документ»</b>.</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">word.cloud.microsoft</span></div>
+    <div class="w-head"><span class="waffle"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span><b>Word</b><span class="w-search">🔍 Поиск</span><span class="avatar">ЕИ</span></div>
+    <div class="w-body">
+      <div class="rail"><div class="on"><span>⌂</span>Главная</div><div><span>＋</span>Создать</div><div><span>▤</span>Мои файлы</div></div>
+      <div class="w-main">
+        <h4>Создать</h4>
+        <div class="tiles">
+          <div class="tile hl" data-n="1"><b></b>Пустой документ</div>
+          <div class="tile tpl"><b></b>Отчет</div>
+          <div class="tile tpl"><b></b>Реферат</div>
+        </div>
+        <div class="recent-head"><b>Последние</b><span class="upl">⬆ Отправить</span></div>
+        <div class="recent">Пока здесь пусто. Скоро тут будут ваши доклады.</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip">⭐ <b>Полезная хитрость:</b> пока вы на этой странице, нажмите на клавиатуре одновременно <span class="tag">Ctrl</span> и <span class="tag">D</span>, а потом «Готово». Страница сохранится в закладки (они видны под адресной строкой), и в следующий раз Word откроется одним нажатием.</div>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="8">
+  <h2><span class="n">8</span>Подпишите документ</h2>
+  <p>Пока ваш документ называется скучно: «Документ 1». Давайте дадим ему нормальное имя, чтобы потом не перепутать доклады.</p>
+  <div class="do"><ol>
+    <li>Нажмите на надпись «Документ 1» на синей полоске вверху.</li>
+    <li>Сотрите её и напечатайте своё название. Например: <i>Доклад по истории Петров 7Б</i>.</li>
+    <li>Нажмите на клавиатуре <span class="tag">Enter</span> (большая клавиша справа, со стрелочкой ↵).</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">word.cloud.microsoft</span></div>
+    <div class="titlebar">
+      <span class="waffle"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span><b>Word</b>
+      <span class="docname" style="position:relative"><span class="hl" data-n="1" style="padding:0 6px">Документ 1 ⌄</span>
+        <div class="rename">
+          <div class="muted" style="font-size:12px">Имя файла</div>
+          <div class="field hl" data-n="2" style="margin-top:4px">Доклад по истории Петров 7Б</div>
+          <div class="muted" style="font-size:11.5px;margin-top:8px">Расположение: OneDrive › Документы</div>
+        </div>
+      </span>
+      <span class="saved">· Сохранено</span>
+      <span style="margin-left:auto" class="avatar">ЕИ</span>
+    </div>
+    <div class="tabs"><span>Файл</span><span class="on">Главная</span><span>Вставка</span><span class="x">Макет</span><span class="x">Ссылки</span><span class="x">Рецензирование</span><span class="x">Вид</span></div>
+    <div class="canvas" style="min-height:190px"><div class="sheet" style="min-height:120px"></div></div>
+  </div>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="9">
+  <h2><span class="n">9</span>Пишем! ✍️</h2>
+  <p>Это тот самый Ворд, к которому вы привыкли. Все главные кнопки уже на виду, на вкладке «Главная». Вот что чаще всего нужно для школы:</p>
+  <div class="cheat">
+    <div><span class="cnum">1</span><span><b>Шрифт и размер.</b> Сначала выделите текст мышкой (зажмите левую кнопку и проведите по словам), потом выберите шрифт, например «Times New Roman», и размер «14».</span></div>
+    <div><span class="cnum">2</span><span><b>Жирный, курсив, подчёркнутый.</b> Кнопки <b>Ж</b>, <i>К</i>, <u>Ч</u>. Удобно для заголовков.</span></div>
+    <div><span class="cnum">3</span><span><b>Ровные края текста</b> (учителя это любят). Выделите текст и нажмите значок выравнивания «по ширине».</span></div>
+    <div><span class="cnum">4</span><span><b>Картинка или таблица.</b> Вкладка «Вставка» → «Рисунок» или «Таблица».</span></div>
+  </div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">word.cloud.microsoft</span></div>
+    <div class="titlebar"><span class="waffle"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span><b>Word</b><span class="docname">Доклад по истории Петров 7Б</span><span class="saved hl" data-n="✓" style="padding:0 4px">Сохранено</span><span style="margin-left:auto" class="avatar">ЕИ</span></div>
+    <div class="tabs"><span>Файл</span><span class="on">Главная</span><span class="hl" data-n="4" style="padding:3px 4px 4px">Вставка</span><span class="x">Макет</span><span class="x">Ссылки</span><span class="x">Рецензирование</span><span class="x">Вид</span></div>
+    <div class="tools">
+      <span class="x">↶ ↷</span><span class="sep x"></span>
+      <span class="hl" data-n="1" style="display:flex;gap:6px;padding:1px 3px"><span class="t">Times New Roman ⌄</span><span class="t">14 ⌄</span></span>
+      <span class="hl" data-n="2" style="display:flex;gap:4px;padding:1px 3px"><span class="t"><b>Ж</b></span><span class="t"><i>К</i></span><span class="t"><u>Ч</u></span></span>
+      <span class="sep"></span>
+      <span style="display:flex;gap:4px"><span class="t">≡</span><span class="t">☰</span><span class="t hl" data-n="3">▤</span></span>
+      <span class="right-btns x"><span class="pill">💬 Примечания</span><span class="pill share">Поделиться</span></span>
+    </div>
+    <div class="canvas"><div class="sheet"><div style="text-align:center;font-weight:700;margin-bottom:10px">Доклад по истории</div><div style="text-align:justify">Пётр I родился в 1672 году в Москве. Он стал одним из самых известных правителей России…</div></div></div>
+  </div>
+  <div class="tip">😌 <b>Сохранять ничего не нужно!</b> Word делает это сам каждые несколько секунд. Видите вверху слово «Сохранено»? Значит, всё записано. Даже если закрыть страницу или выключится свет, доклад никуда не денется.</div>
+  <div class="tip">↩️ <b>Ошиблись?</b> Нажмите <span class="tag">Ctrl</span> + <span class="tag">Z</span>, и последнее действие отменится. Можно нажимать несколько раз.</div>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="cheer">💪 <b>Доклад написан!</b> Осталось самое приятное: отдать его учителю.</div>
+
+<!-- ================= ЧАСТЬ 3 ================= -->
+<div class="part">Часть 3 из 3 · Сдаём учителю</div>
+<p class="part-sub">Обычно учитель просит файл Word или PDF. Выберите, что нужно, и сделайте <b>шаг 10 или шаг 11</b>, оба не обязательно. Готовый файл появится в папке «Загрузки» на компьютере.</p>
+
+<div class="step" data-step="10">
+  <h2><span class="n">10</span>Учитель просит файл Word</h2>
+  <div class="do"><ol>
+    <li>Нажмите слово <span class="tag">Файл</span> в левом верхнем углу, над листом.</li>
+    <li>Откроется экран со списком слева. Нажмите <span class="tag">Создать копию</span>.</li>
+    <li>Справа нажмите <span class="tag">Скачать копию</span>. Всё!</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">word.cloud.microsoft</span></div>
+    <div class="titlebar"><span class="waffle"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span><b>Word</b><span class="docname">Доклад по истории Петров 7Б</span></div>
+    <div class="bs">
+      <div class="bs-left">
+        <div class="back">← Назад</div>
+        <div>Главная</div><div>Создать</div><div>Открыть</div><div>Сведения</div>
+        <div class="selected hl" data-n="1">Создать копию</div>
+        <div>Печать</div><div>Поделиться</div><div>Экспорт</div>
+      </div>
+      <div class="bs-right">
+        <h4>Создать копию</h4>
+        <div class="opt"><span class="ficon c">DOCX</span><div><b>Создать копию в Интернете</b><small>Сохранить копию в OneDrive</small></div></div>
+        <div class="opt hl" data-n="2"><span class="ficon w">DOCX</span><div><b>Скачать копию</b><small>Скачать копию на компьютер</small></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="after">В углу браузера мелькнёт значок загрузки, а файл <b>«Доклад по истории Петров 7Б.docx»</b> окажется в папке «Загрузки». Его можно отправить учителю в чат или на почту. Чтобы вернуться к докладу, нажмите <span class="tag">← Назад</span>.</p>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="11">
+  <h2><span class="n">11</span>Учитель просит PDF</h2>
+  <div class="do"><ol>
+    <li>Нажмите <span class="tag">Файл</span> в левом верхнем углу.</li>
+    <li>В списке слева выберите <span class="tag">Экспорт</span>.</li>
+    <li>Справа нажмите <span class="tag">Скачать как PDF</span>.</li>
+  </ol></div>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">word.cloud.microsoft</span></div>
+    <div class="titlebar"><span class="waffle"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></span><b>Word</b><span class="docname">Доклад по истории Петров 7Б</span></div>
+    <div class="bs">
+      <div class="bs-left">
+        <div class="back">← Назад</div>
+        <div>Главная</div><div>Создать</div><div>Открыть</div><div>Сведения</div><div>Создать копию</div><div>Печать</div><div>Поделиться</div>
+        <div class="selected hl" data-n="1">Экспорт</div>
+      </div>
+      <div class="bs-right">
+        <h4>Экспорт</h4>
+        <div class="opt hl" data-n="2"><span class="ficon p">PDF</span><div><b>Скачать как PDF</b><small>Без примечаний</small></div></div>
+        <div class="opt"><span class="ficon p">PDF</span><div><b>Скачать как PDF с примечаниями</b></div></div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:16px">4. Через пару секунд появится окошко. Нажмите в нём <span class="tag">Скачать</span>:</p>
+  <div class="screen">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">word.cloud.microsoft</span></div>
+    <div class="dialog-wrap">
+      <div class="dialog">
+        <h4>Ваш PDF-файл готов</h4>
+        <div class="muted" style="font-size:13px">Доклад по истории Петров 7Б.pdf</div>
+        <div class="btns"><span class="db primary hl" data-n="3">Скачать</span><span class="db">Закрыть</span></div>
+      </div>
+    </div>
+  </div>
+  <button class="done-btn" type="button">✓ Готово, дальше</button>
+</div>
+
+<div class="step" data-step="12">
+  <h2><span class="n">12</span>Нужно на бумаге? Печатаем 🖨️</h2>
+  <div class="do"><ol>
+    <li>Включите принтер.</li>
+    <li>В Word нажмите на клавиатуре <span class="tag">Ctrl</span> + <span class="tag">P</span>.</li>
+    <li>Word покажет, как будет выглядеть лист. Нажмите <span class="tag">Печать</span>, выберите свой принтер и ещё раз <span class="tag">Печать</span>.</li>
+  </ol></div>
+  <button class="done-btn" type="button">✓ Готово!</button>
+</div>
+
+<div class="cheer final" id="final">🏆 <b>Вы молодец!</b> Теперь у вас есть настоящий Word, и он никуда не «слетит». Доклады, рефераты, сочинения — всё можно делать тут.</div>
+
+<!-- ================= В СЛЕДУЮЩИЙ РАЗ ================= -->
+<div class="part">Шпаргалка на следующий раз</div>
+<div class="next">
+  <div><span class="cnum">1</span><span>Откройте закладку Word (или вот ссылка: <a href="https://word.cloud.microsoft/" target="_blank" rel="noopener">word.cloud.microsoft</a>).</span></div>
+  <div><span class="cnum">2</span><span>Обычно Word вас помнит и сразу открывается. Если просит войти: почта → «Далее» → код из письма. Пароль не нужен.</span></div>
+  <div><span class="cnum">3</span><span>Все ваши доклады лежат внизу, в разделе «Последние». Нажмите на нужный — и продолжайте.</span></div>
+</div>
+
+<!-- ================= FAQ ================= -->
+<div class="part">Если что-то пошло не так</div>
+<p class="part-sub">Не переживайте: сломать тут ничего нельзя. Самое страшное, что может случиться, — придётся повторить шаг.</p>
+<div class="faq">
+  <details>
+    <summary>Сайт не открывается или пишет «недоступно в вашем регионе»</summary>
+    <p>Попробуйте открыть ссылку в другом браузере: Яндекс Браузер, Chrome или Edge. Если на компьютере есть VPN, включите его и обновите страницу (клавиша <span class="tag">F5</span>). Не помогло — напишите Диме.</p>
+  </details>
+  <details>
+    <summary>Пишет «Создание учетной записи заблокировано»</summary>
+    <p>Это временный сбой у Microsoft, вы ни в чём не виноваты. Если включён VPN, выключите его. Подождите пару часов и попробуйте снова. Не помогло — напишите Диме.</p>
+  </details>
+  <details>
+    <summary>Microsoft всё-таки просит придумать пароль</summary>
+    <p>Бывает и так. Придумайте пароль от 8 символов (буквы и цифры) и сразу запишите его в блокнот или в заметки в телефоне.</p>
+  </details>
+  <details>
+    <summary>Как открыть файл, который прислал учитель</summary>
+    <p>Сначала скачайте его на компьютер. Потом откройте Word, нажмите кнопку <span class="tag">⬆ Отправить</span> рядом с надписью «Последние» и выберите файл из папки «Загрузки». Он откроется, и его можно будет дописывать.</p>
+  </details>
+  <details>
+    <summary>Нет интернета</summary>
+    <p>Без интернета этот Word, к сожалению, не работает. Если доклад горит, а интернета нет, напишите Диме: есть программа, которая работает и без него.</p>
+  </details>
+</div>
+
+<div class="contact">💬 <b>Застряли или что-то непонятно?</b> Сфотографируйте экран на телефон и пришлите Диме, разберёмся. И вообще пишите с любыми техническими вопросами: учётные записи, почта, компьютер, телефон. Чем смогу — помогу!</div>
+
+<footer>Ссылки: <a href="https://signup.live.com/" target="_blank" rel="noopener">регистрация Microsoft</a> · <a href="https://word.cloud.microsoft/" target="_blank" rel="noopener">Word в браузере</a></footer>
+</div>
+
+<script>
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.step[data-step]'));
+  var total=steps.length, KEY='word-guide-done';
+  var done={};
+  try{ done=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ done={}; }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(done)); }catch(e){} }
+  function render(){
+    var c=0;
+    steps.forEach(function(st){
+      var id=st.getAttribute('data-step'), on=!!done[id];
+      st.classList.toggle('done',on);
+      var b=st.querySelector('.done-btn');
+      if(b){ b.textContent = on ? '✓ Сделано (нажмите, чтобы отменить)' : (id==String(total)?'✓ Готово!':'✓ Готово, дальше'); }
+      if(on) c++;
+    });
+    document.getElementById('ptext').textContent = c===total ? '🏆 Все шаги пройдены!' : 'Пройдено '+c+' из '+total+' шагов';
+    document.getElementById('pfill').style.width=(c/total*100)+'%';
+  }
+  steps.forEach(function(st,i){
+    var b=st.querySelector('.done-btn'); if(!b) return;
+    b.addEventListener('click',function(){
+      var id=st.getAttribute('data-step');
+      done[id]=!done[id]; save(); render();
+      if(done[id]){
+        var next=steps[i+1]||document.getElementById('final');
+        if(next) setTimeout(function(){ next.scrollIntoView({behavior:'smooth',block:'start'}); },250);
+      }
+    });
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>
